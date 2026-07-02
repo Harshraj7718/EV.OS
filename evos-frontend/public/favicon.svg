@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="12" fill="#0B0F14"/>
+  <path d="M26 8L13 27H22L20 40L36 19H26L28 8Z" fill="url(#evosGradient)"/>
+  <defs>
+    <linearGradient id="evosGradient" x1="13" y1="8" x2="36" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00E676"/>
+      <stop offset="1" stop-color="#00E5FF"/>
+    </linearGradient>
+  </defs>
+</svg>
