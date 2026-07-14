@@ -1,0 +1,33 @@
+# Copy to /etc/nginx/sites-available/evos, then:
+#   sudo ln -s /etc/nginx/sites-available/evos /etc/nginx/sites-enabled/
+#   sudo nginx -t && sudo systemctl reload nginx
+# Run certbot AFTER this config is live to auto-fill the SSL server block.
+
+server {
+    listen 80;
+    server_name yourdomain.com www.yourdomain.com;
+
+    # Serve the built React app
+    root /var/www/evos/evos-frontend/dist;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Reverse proxy API calls to the Node/Express backend running via PM2
+    location /api/ {
+        proxy_pass http://127.0.0.1:5000/api/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    gzip on;
+    gzip_types text/css application/javascript application/json image/svg+xml;
+}
