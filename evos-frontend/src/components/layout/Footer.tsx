@@ -31,7 +31,7 @@ export const Footer = () => {
                 <Zap className="h-5 w-5" fill="currentColor" aria-hidden="true" />
               </span>
               <span>
-                EV<span className="text-gradient">.OS</span>
+                Booklynk<span className="text-gradient"> EV</span>
               </span>
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
@@ -92,7 +92,7 @@ export const Footer = () => {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
-          <p>&copy; {new Date().getFullYear()} EV.OS. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Booklynk EV. All rights reserved.</p>
           <p>Made in India, built for the world.</p>
         </div>
       </div>

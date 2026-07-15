@@ -7,7 +7,7 @@ const startServer = async (): Promise<void> => {
   await connectDatabase();
 
   const server = app.listen(env.port, () => {
-    logger.info(`EV.OS API running in ${env.nodeEnv} mode on port ${env.port}`);
+    logger.info(`Booklynk EV API running in ${env.nodeEnv} mode on port ${env.port}`);
   });
 
   const shutdown = (signal: string): void => {

@@ -1,7 +1,7 @@
 {
   "name": "evos-backend",
   "version": "1.0.0",
-  "description": "EV.OS Backend REST API - The Operating System for India's EV Economy",
+  "description": "Booklynk EV Backend REST API - The Operating System for India's EV Economy",
   "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
@@ -18,7 +18,7 @@
     "express",
     "typescript"
   ],
-  "author": "EV.OS",
+  "author": "Booklynk EV",
   "license": "UNLICENSED",
   "dependencies": {
     "compression": "^1.7.4",

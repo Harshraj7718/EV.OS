@@ -84,9 +84,7 @@ export const InvestmentPlansSection = () => {
             Looking for a customized fleet size? We provide flexible investment plans tailored to
             your business needs.
           </p>
-          <p className="mt-4 text-sm font-semibold text-primary">
-            Custom Rental: {formatINR(40000)} per Scooter
-          </p>
+          <p className="mt-4 text-sm font-semibold text-primary">Upto Rs.4500 per Scooty</p>
           <Button size="lg" variant="outline" className="mt-6" onClick={() => openModal('Investor')}>
             Contact Sales
           </Button>

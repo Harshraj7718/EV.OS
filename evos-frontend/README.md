@@ -1,8 +1,8 @@
-# EV.OS Frontend
+# Booklynk EV Frontend
 
-React 19 + TypeScript + Vite + Tailwind CSS + shadcn/ui SaaS marketing site for EV.OS — "Invest. Ride. Earn. Scale."
+React 19 + TypeScript + Vite + Tailwind CSS + shadcn/ui SaaS marketing site for Booklynk EV — "Invest. Ride. Earn. Scale."
 
-This is the frontend half of the EV.OS monorepo. It communicates with [`evos-backend`](../evos-backend) exclusively via REST (`VITE_API_URL`).
+This is the frontend half of the Booklynk EV monorepo. It communicates with [`evos-backend`](../evos-backend) exclusively via REST (`VITE_API_URL`).
 
 See the [root README](../README.md) for full project documentation, API reference, and deployment guide.
 

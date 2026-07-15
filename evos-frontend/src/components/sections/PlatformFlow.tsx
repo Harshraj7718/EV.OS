@@ -4,7 +4,7 @@ import { SectionHeading } from '@/components/shared/SectionHeading';
 
 const FLOW_NODES = [
   { icon: TrendingUp, label: 'Investor' },
-  { icon: Zap, label: 'EV.OS' },
+  { icon: Zap, label: 'Booklynk EV' },
   { icon: Cpu, label: 'Fleet OS' },
   { icon: Bike, label: 'Riders' },
   { icon: Briefcase, label: 'Businesses' },

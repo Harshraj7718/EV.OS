@@ -21,7 +21,7 @@ export const RiderSection = () => {
       ctaLabel="Join as Rider"
       interest="Rider"
       image={rideImage}
-      imageAlt="EV.OS rider earning on the road with the rider earnings dashboard"
+      imageAlt="Booklynk EV rider earning on the road with the rider earnings dashboard"
       reverse
     />
   );

@@ -5,7 +5,7 @@ const FAQS = [
   {
     question: 'How does EV investment work?',
     answer:
-      'You purchase an EV asset through EV.OS, and we deploy it into our professionally managed fleet. The vehicle generates revenue through rider subscriptions and business partnerships, and you receive a share as monthly passive income — with full visibility through your investor dashboard.',
+      'You purchase an EV asset through Booklynk EV, and we deploy it into our professionally managed fleet. The vehicle generates revenue through rider subscriptions and business partnerships, and you receive a share as monthly passive income — with full visibility through your investor dashboard.',
   },
   {
     question: 'How do riders join?',
@@ -20,12 +20,12 @@ const FAQS = [
   {
     question: 'Can businesses onboard fleets?',
     answer:
-      'Yes. Businesses can onboard existing fleets or lease new EVs through EV.OS, and manage everything — GPS tracking, battery analytics, attendance, and maintenance — from a single dashboard.',
+      'Yes. Businesses can onboard existing fleets or lease new EVs through Booklynk EV, and manage everything — GPS tracking, battery analytics, attendance, and maintenance — from a single dashboard.',
   },
   {
     question: 'When are we launching?',
     answer:
-      'EV.OS is currently in its seed-stage rollout across key Indian cities, starting with EV scooters. Early adopters get priority onboarding as we expand into bikes, cargo vehicles, and beyond.',
+      'Booklynk EV is currently in its seed-stage rollout across key Indian cities, starting with EV scooters. Early adopters get priority onboarding as we expand into bikes, cargo vehicles, and beyond.',
   },
 ];
 

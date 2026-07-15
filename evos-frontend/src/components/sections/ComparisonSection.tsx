@@ -15,8 +15,8 @@ export const ComparisonSection = () => {
       <div className="container">
         <SectionHeading
           eyebrow="The Difference"
-          title="Why Choose EV.OS"
-          description="Legacy EV rental models cap your upside. EV.OS is built as an infrastructure platform from day one."
+          title="Why Choose Booklynk EV"
+          description="Legacy EV rental models cap your upside. Booklynk EV is built as an infrastructure platform from day one."
         />
 
         <div className="mx-auto mt-16 max-w-3xl overflow-hidden rounded-2xl border border-border shadow-sm">
@@ -28,7 +28,7 @@ export const ComparisonSection = () => {
             </div>
             <div className="bg-primary/10 px-6 py-5">
               <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-primary">
-                EV.OS
+                Booklynk EV
               </h3>
             </div>
           </div>

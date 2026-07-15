@@ -1,12 +1,9 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useLeadModal } from '@/context/LeadModalContext';
 import { HeroIllustration } from './HeroIllustration';
 
 export const Hero = () => {
-  const { openModal } = useLeadModal();
-
   return (
     <section
       id="home"
@@ -44,9 +41,11 @@ export const Hero = () => {
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Button size="lg" className="glow-primary" onClick={() => openModal()}>
-              Book a Demo
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <Button size="lg" className="glow-primary" asChild>
+              <a href="#investors">
+                Book a Demo
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <a href="#why-evos">

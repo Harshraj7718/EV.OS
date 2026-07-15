@@ -1,10 +1,10 @@
-# EV.OS
+# Booklynk EV
 Live LINK- https://booklynkev.com/
 
 **Invest. Ride. Earn. Scale.**
 The Operating System for India's EV Economy.
 
-EV.OS is a premium SaaS marketing site + lead-capture backend for an EV investment and fleet-operations platform. It is built as two fully independent applications — a React frontend and a Node.js/Express REST API — that communicate exclusively over HTTP.
+Booklynk EV is a premium SaaS marketing site + lead-capture backend for an EV investment and fleet-operations platform. It is built as two fully independent applications — a React frontend and a Node.js/Express REST API — that communicate exclusively over HTTP.
 
 ```
 evos/
@@ -166,7 +166,7 @@ Health check.
 ```json
 {
   "success": true,
-  "message": "EV.OS API is healthy",
+  "message": "Booklynk EV API is healthy",
   "data": { "status": "ok", "database": "connected", "timestamp": "...", "uptime": 123.4 }
 }
 ```

@@ -47,7 +47,7 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
-        // EV.OS brand palette
+        // Booklynk EV brand palette
         evos: {
           green: '#00E676',
           'green-dark': '#00C853',

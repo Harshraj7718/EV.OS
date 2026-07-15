@@ -10,6 +10,7 @@ const PILLARS = [
     tagline: 'Passive Income',
     description: 'Own an EV asset, deploy it into our managed fleet, and earn predictable monthly returns.',
     interest: 'Investor' as const,
+    href: '#investors',
     color: 'from-evos-green/20 to-transparent',
   },
   {
@@ -37,9 +38,9 @@ export const WhyEvOS = () => {
     <section id="why-evos" className="py-24 sm:py-32">
       <div className="container">
         <SectionHeading
-          eyebrow="Why EV.OS"
+          eyebrow="Why Booklynk EV"
           title={'One Platform.\nThree Stakeholders.\nInfinite Possibilities.'}
-          description="EV.OS connects every layer of India's EV economy into a single intelligent operating system."
+          description="Booklynk EV connects every layer of India's EV economy into a single intelligent operating system."
         />
 
         <div className="mt-16 grid gap-6 md:grid-cols-3">
@@ -47,7 +48,11 @@ export const WhyEvOS = () => {
             <motion.button
               key={pillar.title}
               type="button"
-              onClick={() => openModal(pillar.interest)}
+              onClick={() =>
+                pillar.href
+                  ? document.querySelector(pillar.href)?.scrollIntoView({ behavior: 'smooth' })
+                  : openModal(pillar.interest)
+              }
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}

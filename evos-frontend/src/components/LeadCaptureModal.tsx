@@ -53,7 +53,7 @@ export const LeadCaptureModal = () => {
     try {
       await apiClient.post('/leads', values);
       toast.success("You're on the list!", {
-        description: "Our team will reach out to you shortly. Welcome to EV.OS.",
+        description: "Our team will reach out to you shortly. Welcome to Booklynk EV.",
       });
       reset(leadFormDefaultValues);
       closeModal();
@@ -68,7 +68,7 @@ export const LeadCaptureModal = () => {
     <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Join the EV.OS Ecosystem</DialogTitle>
+          <DialogTitle>Join the Booklynk EV Ecosystem</DialogTitle>
           <DialogDescription>
             Tell us a little about yourself and we&apos;ll get you started on the EV Operating
             System.

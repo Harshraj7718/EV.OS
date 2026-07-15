@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { useLeadModal } from '@/context/LeadModalContext';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
@@ -19,7 +18,6 @@ const NAV_LINKS = [
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { openModal } = useLeadModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -48,7 +46,7 @@ export const Navbar = () => {
             <Zap className="h-5 w-5" fill="currentColor" aria-hidden="true" />
           </span>
           <span>
-            EV<span className="text-gradient">.OS</span>
+            Booklynk<span className="text-gradient"> EV</span>
           </span>
         </a>
 
@@ -67,7 +65,9 @@ export const Navbar = () => {
 
         <div className="hidden items-center gap-3 lg:flex">
           <ThemeToggle />
-          <Button onClick={() => openModal()}>Book a Demo</Button>
+          <Button asChild>
+            <a href="#investors">Book a Demo</a>
+          </Button>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
@@ -106,14 +106,10 @@ export const Navbar = () => {
                 </li>
               ))}
               <li className="pt-2">
-                <Button
-                  className="w-full"
-                  onClick={() => {
-                    setMobileOpen(false);
-                    openModal();
-                  }}
-                >
-                  Book a Demo
+                <Button asChild className="w-full">
+                  <a href="#investors" onClick={() => setMobileOpen(false)}>
+                    Book a Demo
+                  </a>
                 </Button>
               </li>
             </ul>

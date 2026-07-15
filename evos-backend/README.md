@@ -1,8 +1,8 @@
-# EV.OS Backend
+# Booklynk EV Backend
 
-Node.js + Express + TypeScript + MongoDB REST API powering lead capture for EV.OS.
+Node.js + Express + TypeScript + MongoDB REST API powering lead capture for Booklynk EV.
 
-This is the backend half of the EV.OS monorepo. It is a standalone REST API — it does not render any UI and is consumed only by [`evos-frontend`](../evos-frontend) (or any other client) over HTTP.
+This is the backend half of the Booklynk EV monorepo. It is a standalone REST API — it does not render any UI and is consumed only by [`evos-frontend`](../evos-frontend) (or any other client) over HTTP.
 
 See the [root README](../README.md) for full project documentation, API reference, and deployment guide.
 

@@ -15,13 +15,13 @@ export const BusinessSection = () => {
     <StakeholderSection
       id="business"
       eyebrow="For Businesses"
-      title="Power Your Fleet with EV.OS"
+      title="Power Your Fleet with Booklynk EV"
       description="Run your delivery or mobility fleet on an AI-powered dashboard with real-time GPS, battery intelligence, trip analytics and maintenance alerts."
       features={FEATURES}
       ctaLabel="Partner as Business"
       interest="Business"
       image={businessImage}
-      imageAlt="EV.OS fleet management dashboard powering a business's electric scooter fleet"
+      imageAlt="Booklynk EV fleet management dashboard powering a business's electric scooter fleet"
     />
   );
 };

@@ -17,7 +17,7 @@ export const RoadmapSection = () => {
         <SectionHeading
           eyebrow="Roadmap"
           title="Built for What's Next"
-          description="EV.OS starts with scooters and scales into every category of India's electric mobility economy."
+          description="Booklynk EV starts with scooters and scales into every category of India's electric mobility economy."
         />
 
         <div className="relative mt-20">

@@ -20,7 +20,7 @@ export const InvestorSection = () => {
       ctaLabel="Join as Investor"
       interest="Investor"
       image={investImage}
-      imageAlt="Invest in India's EV future — EV.OS investor fleet illustration"
+      imageAlt="Invest in India's EV future — Booklynk EV investor fleet illustration"
     />
   );
 };

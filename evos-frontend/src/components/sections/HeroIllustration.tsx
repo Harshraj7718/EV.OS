@@ -32,7 +32,7 @@ export const HeroIllustration = () => {
 
       <motion.img
         src={evScooterImage}
-        alt="EV.OS electric scooter"
+        alt="Booklynk EV electric scooter"
         className="relative z-10 h-full w-full object-contain drop-shadow-2xl"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: [0, -14, 0] }}

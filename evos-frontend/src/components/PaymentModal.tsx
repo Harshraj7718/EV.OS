@@ -96,7 +96,7 @@ export const PaymentModal = () => {
         key: order.keyId,
         amount: order.amount,
         currency: order.currency,
-        name: 'EV.OS',
+        name: 'Booklynk EV',
         description: `${selectedPlan.name} — ${selectedPlan.scooters}`,
         order_id: order.orderId,
         prefill: {
@@ -136,7 +136,7 @@ export const PaymentModal = () => {
       await apiClient.post('/payment/verify', response);
       setStep('success');
       toast.success('Payment successful!', {
-        description: 'Welcome to the EV.OS investor community.',
+        description: 'Welcome to the Booklynk EV investor community.',
       });
     } catch (error) {
       setStep('failure');
@@ -245,7 +245,7 @@ export const PaymentModal = () => {
             </span>
             <h2 className="mt-6 font-display text-2xl font-bold">🎉 Payment Successful!</h2>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Thank you for choosing EV.OS. Our team will contact you shortly regarding your
+              Thank you for choosing Booklynk EV. Our team will contact you shortly regarding your
               investment.
             </p>
             <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row">

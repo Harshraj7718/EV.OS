@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/', (_req: Request, res: Response) => {
   const dbState = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
-  ApiResponse.success(res, 200, 'EV.OS API is healthy', {
+  ApiResponse.success(res, 200, 'Booklynk EV API is healthy', {
     status: 'ok',
     database: dbState,
     timestamp: new Date().toISOString(),
