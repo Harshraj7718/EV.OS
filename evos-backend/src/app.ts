@@ -11,10 +11,16 @@ import routes from './routes';
 
 const app: Application = express();
 
+// CORS_ORIGIN may be a single origin or a comma-separated list (e.g. apex + www).
+const allowedOrigins = env.corsOrigin
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 app.use(helmet());
 app.use(
   cors({
-    origin: env.corsOrigin,
+    origin: allowedOrigins,
     credentials: true,
   })
 );
