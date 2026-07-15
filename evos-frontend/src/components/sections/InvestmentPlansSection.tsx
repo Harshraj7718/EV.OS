@@ -1,21 +1,17 @@
 import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Check, TrendingUp } from 'lucide-react';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { Button } from '@/components/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
 import { INVESTMENT_PLANS, formatINR } from '@/lib/plans';
 import { usePaymentModal } from '@/context/PaymentModalContext';
 import { useLeadModal } from '@/context/LeadModalContext';
 import { cn } from '@/lib/utils';
 
-const CONTRACT_YEAR_OPTIONS = [1, 2, 3, 5];
+const DEFAULT_CONTRACT_YEARS = 3;
+const MAX_CONTRACT_YEARS = 25;
 
 const formatSignedINR = (amount: number): string => {
   const rounded = Math.round(amount);
@@ -25,7 +21,20 @@ const formatSignedINR = (amount: number): string => {
 export const InvestmentPlansSection = () => {
   const { openPaymentModal } = usePaymentModal();
   const { openModal } = useLeadModal();
-  const [contractYears, setContractYears] = useState(3);
+  const [yearsInput, setYearsInput] = useState(String(DEFAULT_CONTRACT_YEARS));
+
+  const parsedYears = parseInt(yearsInput, 10);
+  const contractYears =
+    Number.isFinite(parsedYears) && parsedYears > 0
+      ? Math.min(parsedYears, MAX_CONTRACT_YEARS)
+      : DEFAULT_CONTRACT_YEARS;
+
+  const handleYearsChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const raw = event.target.value;
+    if (raw === '' || /^\d{1,2}$/.test(raw)) {
+      setYearsInput(raw);
+    }
+  };
 
   return (
     <section id="pricing" className="border-y border-border bg-muted/30 py-24 sm:py-32">
@@ -41,23 +50,21 @@ export const InvestmentPlansSection = () => {
             htmlFor="contract-years"
             className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
           >
-            Return on Investment — Contract Duration
+            Return on Investment — Enter Contract Years
           </label>
-          <Select
-            value={String(contractYears)}
-            onValueChange={(value) => setContractYears(Number(value))}
-          >
-            <SelectTrigger id="contract-years" className="w-full">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {CONTRACT_YEAR_OPTIONS.map((year) => (
-                <SelectItem key={year} value={String(year)}>
-                  {year} {year === 1 ? 'Year' : 'Years'}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <Input
+            id="contract-years"
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            placeholder="e.g. 3"
+            value={yearsInput}
+            onChange={handleYearsChange}
+            className="text-center"
+          />
+          <p className="text-xs text-muted-foreground">
+            Showing returns over {contractYears} {contractYears === 1 ? 'year' : 'years'}
+          </p>
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
