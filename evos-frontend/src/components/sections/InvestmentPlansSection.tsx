@@ -10,7 +10,7 @@ import { usePaymentModal } from '@/context/PaymentModalContext';
 import { useLeadModal } from '@/context/LeadModalContext';
 import { cn } from '@/lib/utils';
 
-const DEFAULT_CONTRACT_YEARS = 3;
+const DEFAULT_CONTRACT_YEARS = 4;
 const MAX_CONTRACT_YEARS = 25;
 
 const formatSignedINR = (amount: number): string => {
