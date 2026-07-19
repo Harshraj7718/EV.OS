@@ -1,17 +1,13 @@
-import { useState } from 'react';
-import type { ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Check, TrendingUp } from 'lucide-react';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { INVESTMENT_PLANS, formatINR } from '@/lib/plans';
 import { usePaymentModal } from '@/context/PaymentModalContext';
 import { useLeadModal } from '@/context/LeadModalContext';
 import { cn } from '@/lib/utils';
 
-const DEFAULT_CONTRACT_YEARS = 4;
-const MAX_CONTRACT_YEARS = 25;
+const CONTRACT_YEARS = 4;
 
 const formatSignedINR = (amount: number): string => {
   const rounded = Math.round(amount);
@@ -21,20 +17,6 @@ const formatSignedINR = (amount: number): string => {
 export const InvestmentPlansSection = () => {
   const { openPaymentModal } = usePaymentModal();
   const { openModal } = useLeadModal();
-  const [yearsInput, setYearsInput] = useState(String(DEFAULT_CONTRACT_YEARS));
-
-  const parsedYears = parseInt(yearsInput, 10);
-  const contractYears =
-    Number.isFinite(parsedYears) && parsedYears > 0
-      ? Math.min(parsedYears, MAX_CONTRACT_YEARS)
-      : DEFAULT_CONTRACT_YEARS;
-
-  const handleYearsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const raw = event.target.value;
-    if (raw === '' || /^\d{1,2}$/.test(raw)) {
-      setYearsInput(raw);
-    }
-  };
 
   return (
     <section id="pricing" className="border-y border-border bg-muted/30 py-24 sm:py-32">
@@ -42,34 +24,12 @@ export const InvestmentPlansSection = () => {
         <SectionHeading
           eyebrow="Investment Plans"
           title="Choose Your EV Investment Plan"
-          description="Select the fleet size that matches your investment goals."
+          description={`Select the fleet size that matches your investment goals. All plans run on a ${CONTRACT_YEARS}-year contract.`}
         />
 
-        <div className="mx-auto mt-10 flex max-w-xs flex-col items-center gap-2">
-          <label
-            htmlFor="contract-years"
-            className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-          >
-            Return on Investment — Enter Contract Years
-          </label>
-          <Input
-            id="contract-years"
-            type="text"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            placeholder="e.g. 3"
-            value={yearsInput}
-            onChange={handleYearsChange}
-            className="text-center"
-          />
-          <p className="text-xs text-muted-foreground">
-            Showing returns over {contractYears} {contractYears === 1 ? 'year' : 'years'}
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {INVESTMENT_PLANS.map((plan, index) => {
-            const totalReturns = plan.monthlyRental * 12 * contractYears;
+            const totalReturns = plan.monthlyRental * 12 * CONTRACT_YEARS;
             const roiPercent = (totalReturns / plan.investment) * 100;
             const netProfit = totalReturns - plan.investment;
 
@@ -117,7 +77,7 @@ export const InvestmentPlansSection = () => {
                 <div className="mt-4 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3">
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
                     <TrendingUp className="h-4 w-4" aria-hidden="true" />
-                    ROI over {contractYears} {contractYears === 1 ? 'Year' : 'Years'}
+                    ROI over {CONTRACT_YEARS}-Year Contract
                   </div>
                   <p className="mt-1 font-display text-2xl font-bold text-primary">
                     {roiPercent.toFixed(0)}%
