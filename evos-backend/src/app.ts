@@ -11,6 +11,11 @@ import routes from './routes';
 
 const app: Application = express();
 
+// Render (and most PaaS platforms) sit behind a single reverse proxy that sets
+// X-Forwarded-For. Trusting exactly one hop lets Express (and express-rate-limit)
+// resolve the real client IP instead of the proxy's internal address.
+app.set('trust proxy', 1);
+
 // CORS_ORIGIN may be a single origin or a comma-separated list (e.g. apex + www).
 const allowedOrigins = env.corsOrigin
   .split(',')
