@@ -6,13 +6,13 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'Investors', href: '#investors' },
-  { label: 'Riders', href: '#riders' },
-  { label: 'Business', href: '#business' },
-  { label: 'About', href: '#why-evos' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#footer' },
+  { label: 'Home', href: '/#home' },
+  { label: 'Investors', href: '/#investors' },
+  { label: 'Riders', href: '/#riders' },
+  { label: 'Business', href: '/#business' },
+  { label: 'About', href: '/#why-evos' },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'Contact', href: '/#footer' },
 ];
 
 export const Navbar = () => {
@@ -41,7 +41,7 @@ export const Navbar = () => {
       )}
     >
       <nav className="container flex h-20 items-center justify-between" aria-label="Primary">
-        <a href="#home" className="flex items-center gap-2 font-display text-xl font-bold">
+        <a href="/#home" className="flex items-center gap-2 font-display text-xl font-bold">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Zap className="h-5 w-5" fill="currentColor" aria-hidden="true" />
           </span>
@@ -66,7 +66,7 @@ export const Navbar = () => {
         <div className="hidden items-center gap-3 lg:flex">
           <ThemeToggle />
           <Button asChild>
-            <a href="#investors">Book a Demo</a>
+            <a href="/#investors">Book a Demo</a>
           </Button>
         </div>
 
@@ -107,7 +107,7 @@ export const Navbar = () => {
               ))}
               <li className="pt-2">
                 <Button asChild className="w-full">
-                  <a href="#investors" onClick={() => setMobileOpen(false)}>
+                  <a href="/#investors" onClick={() => setMobileOpen(false)}>
                     Book a Demo
                   </a>
                 </Button>

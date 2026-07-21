@@ -7,7 +7,10 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { LeadCaptureModal } from '@/components/LeadCaptureModal';
 import { PaymentModal } from '@/components/PaymentModal';
+import { ScrollToTop } from '@/components/ScrollToTop';
 import { Home } from '@/pages/Home';
+import { PrivacyPolicy } from '@/pages/PrivacyPolicy';
+import { TermsOfService } from '@/pages/TermsOfService';
 import { NotFound } from '@/pages/NotFound';
 
 function App() {
@@ -15,11 +18,14 @@ function App() {
     <ThemeProvider>
       <LeadModalProvider>
         <PaymentModalProvider>
+          <ScrollToTop />
           <div className="flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<TermsOfService />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>

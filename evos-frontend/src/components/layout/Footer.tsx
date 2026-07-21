@@ -1,16 +1,11 @@
+import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Twitter, Zap } from 'lucide-react';
 
 const QUICK_LINKS = [
-  { label: 'Investors', href: '#investors' },
-  { label: 'Riders', href: '#riders' },
-  { label: 'Business', href: '#business' },
-  { label: 'FAQ', href: '#faq' },
-];
-
-const LEGAL_LINKS = [
-  { label: 'Privacy Policy', href: '#privacy' },
-  { label: 'Terms of Service', href: '#terms' },
-  { label: 'Contact', href: '#footer' },
+  { label: 'Investors', href: '/#investors' },
+  { label: 'Riders', href: '/#riders' },
+  { label: 'Business', href: '/#business' },
+  { label: 'FAQ', href: '/#faq' },
 ];
 
 const SOCIALS = [
@@ -26,7 +21,7 @@ export const Footer = () => {
       <div className="container py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <a href="#home" className="flex items-center gap-2 font-display text-xl font-bold">
+            <a href="/#home" className="flex items-center gap-2 font-display text-xl font-bold">
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <Zap className="h-5 w-5" fill="currentColor" aria-hidden="true" />
               </span>
@@ -77,16 +72,30 @@ export const Footer = () => {
               Legal
             </h3>
             <ul className="mt-4 space-y-3">
-              {LEGAL_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/privacy"
+                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/terms"
+                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="/#footer"
+                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Contact
+                </a>
+              </li>
             </ul>
           </div>
         </div>
