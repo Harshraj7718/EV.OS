@@ -231,9 +231,7 @@ export const PaymentModal = () => {
                 )}
               </Button>
 
-              <p className="text-center text-xs text-muted-foreground">
-                Secured by Razorpay · Test Mode
-              </p>
+              <p className="text-center text-xs text-muted-foreground">Secured by Razorpay</p>
             </form>
           </>
         )}
