@@ -7,6 +7,17 @@ export const notFoundHandler = (req: Request, res: Response): void => {
   ApiResponse.failure(res, 404, `Route not found: ${req.method} ${req.originalUrl}`);
 };
 
+const describeUnknownError = (error: unknown): string => {
+  if (error instanceof Error) {
+    return error.stack || error.message;
+  }
+  try {
+    return JSON.stringify(error);
+  } catch {
+    return String(error);
+  }
+};
+
 export const errorHandler = (
   error: Error,
   _req: Request,
@@ -16,22 +27,22 @@ export const errorHandler = (
 ): void => {
   if (error instanceof ApiError) {
     if (error.statusCode >= 500) {
-      logger.error(error.stack || error.message);
+      logger.error(describeUnknownError(error));
     }
     ApiResponse.failure(res, error.statusCode, error.message, error.errors);
     return;
   }
 
-  if (error.name === 'CastError') {
+  if (error?.name === 'CastError') {
     ApiResponse.failure(res, 400, 'Invalid resource identifier');
     return;
   }
 
-  if (error.name === 'ValidationError') {
+  if (error?.name === 'ValidationError') {
     ApiResponse.failure(res, 400, error.message);
     return;
   }
 
-  logger.error(error.stack || error.message);
+  logger.error(describeUnknownError(error));
   ApiResponse.failure(res, 500, 'Internal server error');
 };

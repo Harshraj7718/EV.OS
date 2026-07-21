@@ -36,17 +36,30 @@ export class PaymentService {
       throw ApiError.badRequest('Invalid investment plan selected');
     }
 
-    const order = await razorpayClient.orders.create({
-      amount: canonicalAmount * 100,
-      currency: 'INR',
-      receipt: `evos_${dto.plan.toLowerCase()}_${Date.now()}`,
-      notes: {
-        name: dto.name,
-        email: dto.email,
-        phone: dto.phone,
-        plan: dto.plan,
-      },
-    });
+    let order: { id: string };
+    try {
+      order = await razorpayClient.orders.create({
+        amount: canonicalAmount * 100,
+        currency: 'INR',
+        receipt: `evos_${dto.plan.toLowerCase()}_${Date.now()}`,
+        notes: {
+          name: dto.name,
+          email: dto.email,
+          phone: dto.phone,
+          plan: dto.plan,
+        },
+      });
+    } catch (error) {
+      // The Razorpay SDK doesn't throw real Error objects — it rejects with
+      // { statusCode, error: { description, code, ... } }, so it must be
+      // unpacked explicitly or the real failure reason is lost.
+      const razorpayError = error as { statusCode?: number; error?: { description?: string; code?: string } };
+      const description = razorpayError?.error?.description || razorpayError?.error?.code;
+      logger.error(`Razorpay order creation failed: ${JSON.stringify(razorpayError?.error ?? error)}`);
+      throw ApiError.badRequest(
+        description ? `Payment gateway error: ${description}` : 'Failed to create payment order'
+      );
+    }
 
     await this.repository.create({
       name: dto.name,
