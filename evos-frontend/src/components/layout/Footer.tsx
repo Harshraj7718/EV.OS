@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, X } from 'lucide-react';
 import logo from '@/assets/logo-full.webp';
 
 const QUICK_LINKS = [
@@ -10,10 +10,18 @@ const QUICK_LINKS = [
 ];
 
 const SOCIALS = [
-  { label: 'Twitter', icon: Twitter, href: 'https://twitter.com' },
-  { label: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com' },
-  { label: 'Instagram', icon: Instagram, href: 'https://instagram.com' },
-  { label: 'Facebook', icon: Facebook, href: 'https://facebook.com' },
+  {
+    label: 'Facebook',
+    icon: Facebook,
+    href: 'https://www.facebook.com/profile.php?id=61588706544369',
+  },
+  { label: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/booklynk-ev/' },
+  { label: 'X', icon: X, href: 'https://x.com/booklynkev?s=11&t=xCTy74-n2pVjYtA6ZQMjJQ' },
+  {
+    label: 'Instagram',
+    icon: Instagram,
+    href: 'https://www.instagram.com/booklynkev?igsh=MWk5N212MGpmdTcxcg==',
+  },
 ];
 
 export const Footer = () => {
