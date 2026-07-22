@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
+import logo from '@/assets/logo-full.webp';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/#home' },
@@ -41,13 +42,8 @@ export const Navbar = () => {
       )}
     >
       <nav className="container flex h-20 items-center justify-between" aria-label="Primary">
-        <a href="/#home" className="flex items-center gap-2 font-display text-xl font-bold">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Zap className="h-5 w-5" fill="currentColor" aria-hidden="true" />
-          </span>
-          <span>
-            Booklynk<span className="text-gradient"> EV</span>
-          </span>
+        <a href="/#home" className="flex items-center rounded-lg bg-white/95 px-3 py-1.5 shadow-sm">
+          <img src={logo} alt="Booklynk EV" className="h-7 w-auto sm:h-8" />
         </a>
 
         <ul className="hidden items-center gap-8 lg:flex">

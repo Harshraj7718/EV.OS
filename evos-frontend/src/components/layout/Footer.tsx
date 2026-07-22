@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Twitter, Zap } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import logo from '@/assets/logo-full.webp';
 
 const QUICK_LINKS = [
   { label: 'Investors', href: '/#investors' },
@@ -21,13 +22,8 @@ export const Footer = () => {
       <div className="container py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <a href="/#home" className="flex items-center gap-2 font-display text-xl font-bold">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Zap className="h-5 w-5" fill="currentColor" aria-hidden="true" />
-              </span>
-              <span>
-                Booklynk<span className="text-gradient"> EV</span>
-              </span>
+            <a href="/#home" className="inline-flex items-center rounded-lg bg-white/95 px-3 py-1.5 shadow-sm">
+              <img src={logo} alt="Booklynk EV" className="h-8 w-auto" />
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               The Operating System for India's EV Economy. Empowering investors, riders and
