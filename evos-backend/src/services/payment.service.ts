@@ -3,21 +3,11 @@ import { razorpayClient } from '../config/razorpay';
 import { env } from '../config/env';
 import { paymentRepository, PaymentRepository } from '../repositories/payment.repository';
 import { leadService, LeadService } from './lead.service';
-import {
-  ICreateOrderDto,
-  ICreateOrderResult,
-  IVerifyPaymentDto,
-  PlanId,
-} from '../interfaces/payment.interface';
+import { ICreateOrderDto, ICreateOrderResult, IVerifyPaymentDto } from '../interfaces/payment.interface';
 import { IPaymentDocument } from '../models/payment.model';
 import { ApiError } from '../utils/ApiError';
 import { logger } from '../utils/logger';
-
-const PAYABLE_PLAN_AMOUNTS: Record<Exclude<PlanId, 'Custom'>, number> = {
-  Starter: 140000,
-  Growth: 350000,
-  Enterprise: 700000,
-};
+import { resolvePlanAmount } from '../constants/plans';
 
 export class PaymentService {
   constructor(
@@ -31,7 +21,7 @@ export class PaymentService {
     }
 
     // Never trust a client-supplied amount — resolve it server-side from the plan.
-    const canonicalAmount = PAYABLE_PLAN_AMOUNTS[dto.plan];
+    const canonicalAmount = resolvePlanAmount(dto.plan);
     if (!canonicalAmount) {
       throw ApiError.badRequest('Invalid investment plan selected');
     }
