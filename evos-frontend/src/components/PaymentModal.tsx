@@ -299,7 +299,7 @@ export const PaymentModal = () => {
                 <Label htmlFor="payment-name">Customer Name</Label>
                 <Input
                   id="payment-name"
-                  placeholder="Aarav Sharma"
+                  placeholder="Your Name"
                   {...register('name')}
                   aria-invalid={!!errors.name}
                 />

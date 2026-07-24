@@ -79,7 +79,7 @@ export const LeadCaptureModal = () => {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
               <Label htmlFor="name">Full Name</Label>
-              <Input id="name" placeholder="Aarav Sharma" {...register('name')} aria-invalid={!!errors.name} />
+              <Input id="name" placeholder="Your Name" {...register('name')} aria-invalid={!!errors.name} />
               {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
             </div>
 
