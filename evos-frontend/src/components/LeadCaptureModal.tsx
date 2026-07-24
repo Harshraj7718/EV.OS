@@ -88,7 +88,7 @@ export const LeadCaptureModal = () => {
               <Input
                 id="phone"
                 type="tel"
-                placeholder="9876543210"
+                placeholder="Your Phone Number"
                 {...register('phone')}
                 aria-invalid={!!errors.phone}
               />

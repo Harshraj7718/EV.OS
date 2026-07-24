@@ -323,7 +323,7 @@ export const PaymentModal = () => {
                 <Input
                   id="payment-phone"
                   type="tel"
-                  placeholder="9876543210"
+                  placeholder="Your Phone Number"
                   {...register('phone')}
                   aria-invalid={!!errors.phone}
                 />
