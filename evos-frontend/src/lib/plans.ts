@@ -24,7 +24,7 @@ export const INVESTMENT_PLANS: InvestmentPlan[] = [
     name: 'Growth Plan',
     scooters: '5 Scooters',
     investment: 350000,
-    monthlyRental: 18000,
+    monthlyRental: 20000,
     buttonLabel: 'Choose Plan',
     highlighted: true,
   },
@@ -33,7 +33,7 @@ export const INVESTMENT_PLANS: InvestmentPlan[] = [
     name: 'Enterprise Plan',
     scooters: '10 Scooters',
     investment: 700000,
-    monthlyRental: 40000,
+    monthlyRental: 45000,
     buttonLabel: 'Choose Plan',
   },
 ];
