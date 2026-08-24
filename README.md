@@ -9,7 +9,8 @@ Booklynk EV is a premium SaaS marketing site + lead-capture backend for an EV in
 ```
 evos/
 ├── evos-frontend/     React 19 + TypeScript + Vite + Tailwind + shadcn/ui
-└── evos-backend/      Node.js + Express + TypeScript + MongoDB (Mongoose)
+├── evos-backend/      Node.js + Express + TypeScript + MongoDB (Mongoose)
+└── evos-admin/        React 19 + TypeScript + Vite + Tailwind — internal admin panel
 ```
 
 ---
@@ -35,6 +36,13 @@ evos/
 - Helmet, CORS, Compression, Morgan, express-rate-limit
 - Razorpay Node SDK (order creation + HMAC signature verification)
 - Repository → Service → Controller layered architecture
+
+### Admin Panel (`evos-admin`)
+- React 19 + TypeScript, Vite, Tailwind CSS
+- Axios (API client) with a JWT bearer interceptor
+- React Router (login route + protected dashboard route)
+- Sonner (toast notifications)
+- A separate deploy from `evos-frontend` — internal-only, not linked from the public site
 
 ---
 
@@ -68,6 +76,17 @@ npm run dev               # http://localhost:5173
 
 Open `http://localhost:5173` in your browser. The lead capture modal ("Book a Demo" / any stakeholder CTA) submits directly to the backend API.
 
+### Admin Panel
+
+```bash
+cd evos-admin
+cp .env.example .env     # defaults to http://localhost:5000/api
+npm install
+npm run dev               # http://localhost:5174
+```
+
+Open `http://localhost:5174` and sign in with the `ADMIN_USERNAME` / `ADMIN_PASSWORD` set in `evos-backend/.env`. If you're running the frontend and admin panel dev servers at the same time, make sure `evos-backend/.env`'s `CORS_ORIGIN` includes both `http://localhost:5173` and `http://localhost:5174` (comma-separated).
+
 ---
 
 ## 4. Environment Variables
@@ -79,11 +98,14 @@ Open `http://localhost:5173` in your browser. The lead capture modal ("Book a De
 | `PORT` | API server port | `5000` |
 | `MONGODB_URI` | MongoDB Atlas / local connection string | — (required) |
 | `NODE_ENV` | `development` \| `production` \| `test` | `development` |
-| `CORS_ORIGIN` | Allowed frontend origin | `http://localhost:5173` |
+| `CORS_ORIGIN` | Allowed origin(s) — comma-separated for multiple (frontend + admin panel) | `http://localhost:5173,http://localhost:5174` |
 | `RATE_LIMIT_WINDOW_MS` | Rate-limit window (ms) | `900000` |
 | `RATE_LIMIT_MAX_REQUESTS` | Max requests per window | `100` |
 | `RAZORPAY_KEY_ID` | Razorpay **test mode** key ID | — (required) |
 | `RAZORPAY_KEY_SECRET` | Razorpay **test mode** key secret — server-side only, never sent to the client | — (required) |
+| `ADMIN_USERNAME` | Admin panel login username | — (required) |
+| `ADMIN_PASSWORD` | Admin panel login password | — (required) |
+| `JWT_SECRET` | Signing secret for admin session tokens (long random string) | — (required) |
 
 ### `evos-frontend/.env`
 
@@ -92,7 +114,13 @@ Open `http://localhost:5173` in your browser. The lead capture modal ("Book a De
 | `VITE_API_URL` | Base URL of the backend REST API | `http://localhost:5000/api` |
 | `VITE_RAZORPAY_KEY_ID` | Razorpay **test mode** public key ID (safe to expose client-side) | — (required) |
 
-> ⚠️ **Test mode only.** Both apps are wired to Razorpay's TEST environment. Never put live (`rzp_live_...`) credentials in either `.env` file. The key **secret** must only ever live in `evos-backend/.env` — it is never sent to or read by the frontend.
+### `evos-admin/.env`
+
+| Variable | Description | Default |
+|---|---|---|
+| `VITE_API_URL` | Base URL of the backend REST API | `http://localhost:5000/api` |
+
+> ⚠️ **Test mode only.** Both customer-facing apps are wired to Razorpay's TEST environment. Never put live (`rzp_live_...`) credentials in either `.env` file. The key **secret** must only ever live in `evos-backend/.env` — it is never sent to or read by the frontend.
 
 ---
 
@@ -108,6 +136,10 @@ Open `http://localhost:5173` in your browser. The lead capture modal ("Book a De
 | `evos-frontend` | `npm run build` | Type-check + production build to `dist/` |
 | `evos-frontend` | `npm run preview` | Preview the production build locally |
 | `evos-frontend` | `npm run lint` | ESLint check |
+| `evos-admin` | `npm run dev` | Start Vite dev server (port 5174) |
+| `evos-admin` | `npm run build` | Type-check + production build to `dist/` |
+| `evos-admin` | `npm run preview` | Preview the production build locally |
+| `evos-admin` | `npm run lint` | ESLint check |
 
 ---
 
@@ -309,12 +341,19 @@ Mongoose schema timestamps (`createdAt`, `updatedAt`) are enabled automatically 
 4. Add environment variables `VITE_API_URL` (your deployed backend, e.g. `https://api.evos.in/api`) and `VITE_RAZORPAY_KEY_ID` (test key).
 5. Deploy.
 
+### Admin Panel → Vercel
+1. Push `evos-admin/` to a Git repository (same monorepo as the other two apps is fine).
+2. In Vercel: **New Project** → select the repo → set **Root Directory** to `evos-admin`.
+3. Build command: `npm run build`, Output directory: `dist`.
+4. Add environment variable `VITE_API_URL` (your deployed backend, e.g. `https://api.evos.in/api`).
+5. Deploy, then treat the resulting URL as internal-only — it isn't linked from the marketing site and should be shared only with staff. Consider adding Vercel's own password/SSO protection on top of the app's login if it needs to be locked down further.
+
 ### Backend → Render / Railway
 1. Push `evos-backend/` to a Git repository.
 2. Create a new **Web Service**, root directory `evos-backend`.
 3. Build command: `npm install && npm run build`. Start command: `npm start`.
-4. Add environment variables: `PORT` (platform-provided), `MONGODB_URI`, `NODE_ENV=production`, `CORS_ORIGIN=https://your-frontend-domain.com`, `RATE_LIMIT_WINDOW_MS`, `RATE_LIMIT_MAX_REQUESTS`, `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`.
-5. Deploy.
+4. Add environment variables: `PORT` (platform-provided), `MONGODB_URI`, `NODE_ENV=production`, `CORS_ORIGIN=https://your-frontend-domain.com,https://your-admin-domain.com`, `RATE_LIMIT_WINDOW_MS`, `RATE_LIMIT_MAX_REQUESTS`, `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `JWT_SECRET`.
+5. Deploy. After both frontend and admin panel are live, come back and update `CORS_ORIGIN` with their real domains (it's chicken-and-egg on first deploy).
 
 ### Database → MongoDB Atlas
 1. Create a free/shared cluster at [MongoDB Atlas](https://www.mongodb.com/atlas).
@@ -325,8 +364,9 @@ Mongoose schema timestamps (`createdAt`, `updatedAt`) are enabled automatically 
 
 ## 10. Future Improvements
 
-- Admin dashboard to view/manage `lead_submissions` (`PUT /api/leads/:id`, `DELETE /api/leads/:id`)
-- Authentication for admin/investor/rider dashboards
+- `PUT /api/leads/:id` / `DELETE /api/leads/:id` and equivalent mutation endpoints for payments/bank-transfers (the admin panel is currently read-only, plus invoice download)
+- Multi-user admin accounts with roles (currently a single shared username/password)
+- Authentication for investor/rider dashboards
 - Email/SMS notifications on new lead submission
 - CMS-driven content for roadmap, FAQ, and features sections
 - E2E test suite (Playwright) and API integration tests (Jest/Supertest)

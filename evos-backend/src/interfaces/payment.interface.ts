@@ -40,3 +40,9 @@ export interface IVerifyPaymentDto {
   razorpay_payment_id: string;
   razorpay_signature: string;
 }
+
+export interface IPaymentListQuery {
+  page?: number;
+  limit?: number;
+  status?: PaymentStatus;
+}

@@ -20,4 +20,12 @@ export const createBankTransferSchema = z.object({
   }),
 });
 
+export const listBankTransfersSchema = z.object({
+  query: z.object({
+    page: z.coerce.number().int().positive().optional(),
+    limit: z.coerce.number().int().positive().max(100).optional(),
+    status: z.enum(['pending_review', 'verified', 'rejected']).optional(),
+  }),
+});
+
 export type CreateBankTransferInput = z.infer<typeof createBankTransferSchema>['body'];

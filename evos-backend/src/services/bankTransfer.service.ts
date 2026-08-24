@@ -3,7 +3,13 @@ import {
   BankTransferRepository,
 } from '../repositories/bankTransfer.repository';
 import { leadService, LeadService } from './lead.service';
-import { ICreateBankTransferDto, IBankTransferResult } from '../interfaces/bankTransfer.interface';
+import {
+  ICreateBankTransferDto,
+  IBankTransferResult,
+  IBankTransferListQuery,
+} from '../interfaces/bankTransfer.interface';
+import { IPaginatedResult } from '../interfaces/lead.interface';
+import { IBankTransferDocument } from '../models/bankTransfer.model';
 import { ApiError } from '../utils/ApiError';
 import { logger } from '../utils/logger';
 import { resolvePlanAmount } from '../constants/plans';
@@ -50,6 +56,31 @@ export class BankTransferService {
       status: submission.status,
       createdAt: submission.createdAt,
     };
+  }
+
+  async listSubmissions(
+    query: IBankTransferListQuery
+  ): Promise<IPaginatedResult<IBankTransferDocument>> {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 20;
+
+    const { items, total } = await this.repository.findAll({ ...query, page, limit });
+
+    return {
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit) || 1,
+    };
+  }
+
+  async getInvoiceFile(id: string): Promise<IBankTransferDocument> {
+    const submission = await this.repository.findById(id);
+    if (!submission) {
+      throw ApiError.notFound('Bank transfer submission not found');
+    }
+    return submission;
   }
 }
 

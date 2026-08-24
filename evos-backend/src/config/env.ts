@@ -11,6 +11,9 @@ interface EnvConfig {
   rateLimitMaxRequests: number;
   razorpayKeyId: string;
   razorpayKeySecret: string;
+  adminUsername: string;
+  adminPassword: string;
+  jwtSecret: string;
 }
 
 const requireEnv = (key: string): string => {
@@ -30,4 +33,7 @@ export const env: EnvConfig = {
   rateLimitMaxRequests: Number(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
   razorpayKeyId: requireEnv('RAZORPAY_KEY_ID'),
   razorpayKeySecret: requireEnv('RAZORPAY_KEY_SECRET'),
+  adminUsername: requireEnv('ADMIN_USERNAME'),
+  adminPassword: requireEnv('ADMIN_PASSWORD'),
+  jwtSecret: requireEnv('JWT_SECRET'),
 };

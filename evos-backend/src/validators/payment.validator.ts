@@ -35,5 +35,13 @@ export const verifyPaymentSchema = z.object({
   }),
 });
 
+export const listPaymentsSchema = z.object({
+  query: z.object({
+    page: z.coerce.number().int().positive().optional(),
+    limit: z.coerce.number().int().positive().max(100).optional(),
+    status: z.enum(['created', 'paid', 'failed']).optional(),
+  }),
+});
+
 export type CreateOrderInput = z.infer<typeof createOrderSchema>['body'];
 export type VerifyPaymentInput = z.infer<typeof verifyPaymentSchema>['body'];

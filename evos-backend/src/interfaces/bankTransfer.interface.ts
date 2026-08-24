@@ -36,3 +36,9 @@ export interface IBankTransferResult {
   status: BankTransferStatus;
   createdAt?: Date;
 }
+
+export interface IBankTransferListQuery {
+  page?: number;
+  limit?: number;
+  status?: BankTransferStatus;
+}

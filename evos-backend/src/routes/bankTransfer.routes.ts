@@ -2,8 +2,12 @@ import { NextFunction, Request, Response, Router } from 'express';
 import multer, { MulterError } from 'multer';
 import { bankTransferController } from '../controllers/bankTransfer.controller';
 import { validateRequest } from '../middleware/validateRequest';
-import { createBankTransferSchema } from '../validators/bankTransfer.validator';
+import {
+  createBankTransferSchema,
+  listBankTransfersSchema,
+} from '../validators/bankTransfer.validator';
 import { leadSubmissionLimiter } from '../middleware/rateLimiter';
+import { adminAuth } from '../middleware/adminAuth';
 import { ApiError } from '../utils/ApiError';
 
 const ALLOWED_INVOICE_MIME_TYPES = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
@@ -51,5 +55,14 @@ router.post(
   validateRequest(createBankTransferSchema),
   bankTransferController.createSubmission
 );
+
+// Admin-only — exposes every submitter's contact details and invoice files.
+router.get(
+  '/',
+  adminAuth,
+  validateRequest(listBankTransfersSchema),
+  bankTransferController.listSubmissions
+);
+router.get('/:id/invoice', adminAuth, bankTransferController.downloadInvoice);
 
 export default router;

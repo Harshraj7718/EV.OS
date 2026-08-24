@@ -3,7 +3,13 @@ import { razorpayClient } from '../config/razorpay';
 import { env } from '../config/env';
 import { paymentRepository, PaymentRepository } from '../repositories/payment.repository';
 import { leadService, LeadService } from './lead.service';
-import { ICreateOrderDto, ICreateOrderResult, IVerifyPaymentDto } from '../interfaces/payment.interface';
+import {
+  ICreateOrderDto,
+  ICreateOrderResult,
+  IPaymentListQuery,
+  IVerifyPaymentDto,
+} from '../interfaces/payment.interface';
+import { IPaginatedResult } from '../interfaces/lead.interface';
 import { IPaymentDocument } from '../models/payment.model';
 import { ApiError } from '../utils/ApiError';
 import { logger } from '../utils/logger';
@@ -72,6 +78,21 @@ export class PaymentService {
       phone: dto.phone,
       plan: dto.plan,
       investmentAmount: canonicalAmount,
+    };
+  }
+
+  async listPayments(query: IPaymentListQuery): Promise<IPaginatedResult<IPaymentDocument>> {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 20;
+
+    const { items, total } = await this.repository.findAll({ ...query, page, limit });
+
+    return {
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit) || 1,
     };
   }
 

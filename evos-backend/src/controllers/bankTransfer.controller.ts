@@ -4,6 +4,7 @@ import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';
 import { asyncHandler } from '../utils/asyncHandler';
 import { CreateBankTransferInput } from '../validators/bankTransfer.validator';
+import { IBankTransferListQuery } from '../interfaces/bankTransfer.interface';
 import { BANK_TRANSFER_DETAILS } from '../constants/plans';
 
 const MAX_INVOICE_BYTES = 5 * 1024 * 1024;
@@ -41,6 +42,22 @@ export class BankTransferController {
     });
 
     return ApiResponse.success(res, 201, 'Invoice submitted successfully', result);
+  });
+
+  listSubmissions = asyncHandler(async (req: Request, res: Response) => {
+    const query = req.query as unknown as IBankTransferListQuery;
+    const result = await this.service.listSubmissions(query);
+    return ApiResponse.success(res, 200, 'Bank transfer submissions retrieved successfully', result);
+  });
+
+  downloadInvoice = asyncHandler(async (req: Request, res: Response) => {
+    const submission = await this.service.getInvoiceFile(req.params.id);
+    res.setHeader('Content-Type', submission.invoiceFileMimeType);
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${encodeURIComponent(submission.invoiceFileName)}"`
+    );
+    res.send(submission.invoiceFileData);
   });
 }
 
