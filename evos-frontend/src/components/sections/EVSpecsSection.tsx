@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { Smartphone, Gauge } from 'lucide-react';
 import { SectionHeading } from '@/components/shared/SectionHeading';
+import { scheduleScrollTriggerRefresh } from '@/lib/gsapRefresh';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -65,6 +66,8 @@ export const EVSpecsSection = () => {
           },
         });
       });
+
+      scheduleScrollTriggerRefresh();
     },
     { scope: containerRef }
   );

@@ -1,6 +1,14 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, X } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, X } from 'lucide-react';
 import logo from '@/assets/logo-full.webp';
+import { COMPANY_ADDRESS_LINES, COMPANY_EMAIL, PHONE_NUMBERS, toTelHref } from '@/lib/contactInfo';
+import { scheduleScrollTriggerRefresh } from '@/lib/gsapRefresh';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const QUICK_LINKS = [
   { label: 'Investors', href: '/investors' },
@@ -28,10 +36,44 @@ const SOCIALS = [
 ];
 
 export const Footer = () => {
+  const footerRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const phoneIcon = footerRef.current?.querySelector('[data-phone-icon]');
+      if (phoneIcon) {
+        gsap.to(phoneIcon, {
+          boxShadow: '0 0 0 6px rgba(0,230,118,0.18)',
+          duration: 1,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+      }
+
+      const pin = footerRef.current?.querySelector('[data-pin-icon]');
+      if (pin) {
+        gsap.from(pin, {
+          y: -16,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'bounce.out',
+          scrollTrigger: {
+            trigger: pin,
+            start: 'top 95%',
+          },
+        });
+      }
+
+      scheduleScrollTriggerRefresh();
+    },
+    { scope: footerRef }
+  );
+
   return (
-    <footer id="footer" className="border-t border-border bg-card">
+    <footer id="footer" className="border-t border-border bg-card" ref={footerRef}>
       <div className="container py-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <a
               href="/#home"
@@ -107,6 +149,56 @@ export const Footer = () => {
                 </Link>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground">
+              Contact
+            </h3>
+            <ul className="mt-4 space-y-3">
+              <li className="flex items-center gap-2.5">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Mail className="h-3 w-3" aria-hidden="true" />
+                </span>
+                <a
+                  href={`mailto:${COMPANY_EMAIL}`}
+                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {COMPANY_EMAIL}
+                </a>
+              </li>
+              {PHONE_NUMBERS.map((phone) => (
+                <li key={phone} className="flex items-center gap-2.5">
+                  <span
+                    data-phone-icon
+                    className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"
+                  >
+                    <Phone className="h-3 w-3" aria-hidden="true" />
+                  </span>
+                  <a
+                    href={toTelHref(phone)}
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {phone}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-4 flex items-start gap-2.5">
+              <span
+                data-pin-icon
+                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"
+              >
+                <MapPin className="h-3 w-3" aria-hidden="true" />
+              </span>
+              <address className="text-sm not-italic leading-relaxed text-muted-foreground">
+                {COMPANY_ADDRESS_LINES.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </address>
+            </div>
           </div>
         </div>
 

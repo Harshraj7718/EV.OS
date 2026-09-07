@@ -3,7 +3,14 @@ import { Hero } from '@/components/sections/Hero';
 import { TrustSection } from '@/components/sections/TrustSection';
 import { SectionFallback } from '@/components/shared/SectionFallback';
 
-const WhyEvOS = lazy(() => import('@/components/sections/WhyEvOS').then((m) => ({ default: m.WhyEvOS })));
+const DeliveryEcosystemSection = lazy(() =>
+  import('@/components/sections/DeliveryEcosystemSection').then((m) => ({
+    default: m.DeliveryEcosystemSection,
+  }))
+);
+const WhyEvOS = lazy(() =>
+  import('@/components/sections/WhyEvOS').then((m) => ({ default: m.WhyEvOS }))
+);
 const InvestorSection = lazy(() =>
   import('@/components/sections/InvestorSection').then((m) => ({ default: m.InvestorSection }))
 );
@@ -27,6 +34,11 @@ const ComparisonSection = lazy(() =>
 const RoadmapSection = lazy(() =>
   import('@/components/sections/RoadmapSection').then((m) => ({ default: m.RoadmapSection }))
 );
+const BatterySwappingSection = lazy(() =>
+  import('@/components/sections/BatterySwappingSection').then((m) => ({
+    default: m.BatterySwappingSection,
+  }))
+);
 const FeaturesSection = lazy(() =>
   import('@/components/sections/FeaturesSection').then((m) => ({ default: m.FeaturesSection }))
 );
@@ -35,6 +47,11 @@ const DocumentsSection = lazy(() =>
 );
 const FAQSection = lazy(() =>
   import('@/components/sections/FAQSection').then((m) => ({ default: m.FAQSection }))
+);
+const VideoTestimonialsSection = lazy(() =>
+  import('@/components/sections/VideoTestimonialsSection').then((m) => ({
+    default: m.VideoTestimonialsSection,
+  }))
 );
 const CTASection = lazy(() =>
   import('@/components/sections/CTASection').then((m) => ({ default: m.CTASection }))
@@ -46,6 +63,7 @@ export const Home = () => {
       <Hero />
       <TrustSection />
       <Suspense fallback={<SectionFallback />}>
+        <DeliveryEcosystemSection />
         <WhyEvOS />
         <InvestorSection />
         <InvestmentPlansSection />
@@ -54,9 +72,11 @@ export const Home = () => {
         <PlatformFlow />
         <ComparisonSection />
         <RoadmapSection />
+        <BatterySwappingSection />
         <FeaturesSection />
         <DocumentsSection />
         <FAQSection />
+        <VideoTestimonialsSection />
         <CTASection />
       </Suspense>
     </>

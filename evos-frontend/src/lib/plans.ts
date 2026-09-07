@@ -16,7 +16,7 @@ export const INVESTMENT_PLANS: InvestmentPlan[] = [
     name: 'Starter Plan',
     scooters: '2 Scooters',
     investment: 140000,
-    monthlyRental: 7000,
+    monthlyRental: 7500,
     buttonLabel: 'Get Started',
   },
   {
@@ -24,7 +24,7 @@ export const INVESTMENT_PLANS: InvestmentPlan[] = [
     name: 'Growth Plan',
     scooters: '5 Scooters',
     investment: 350000,
-    monthlyRental: 20000,
+    monthlyRental: 21000,
     buttonLabel: 'Choose Plan',
     highlighted: true,
   },
@@ -38,5 +38,4 @@ export const INVESTMENT_PLANS: InvestmentPlan[] = [
   },
 ];
 
-export const formatINR = (amount: number): string =>
-  `₹${amount.toLocaleString('en-IN')}`;
+export const formatINR = (amount: number): string => `₹${amount.toLocaleString('en-IN')}`;

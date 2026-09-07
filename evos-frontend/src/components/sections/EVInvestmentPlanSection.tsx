@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { Bike, Rocket, ShieldCheck } from 'lucide-react';
 import { SectionHeading } from '@/components/shared/SectionHeading';
+import { scheduleScrollTriggerRefresh } from '@/lib/gsapRefresh';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -13,16 +14,16 @@ const PLAN_STEPS = [
     title: 'Buy 2 EV Scooty',
     cost: '₹1,40,000',
     detail:
-      'Cost ₹1,40,000 including GST. You get a monthly rental of ₹7,000 for the next 4 years.',
-    total: 'Total income in 4 years: ₹3,36,000',
+      'Cost ₹1,40,000 including GST. You get a monthly rental of ₹7,500 for the next 4 years.',
+    total: 'Total income in 4 years: ₹3,60,000',
   },
   {
     icon: Bike,
     title: 'Buy 5 EV Scooty',
     cost: '₹3,50,000',
     detail:
-      'Cost ₹3,50,000 including GST. You get a monthly rental of ₹20,000 for the next 4 years.',
-    total: 'Total income in 4 years: ₹9,60,000',
+      'Cost ₹3,50,000 including GST. You get a monthly rental of ₹21,000 for the next 4 years.',
+    total: 'Total income in 4 years: ₹10,08,000',
   },
   {
     icon: Bike,
@@ -46,8 +47,9 @@ export const EVInvestmentPlanSection = () => {
 
   useGSAP(
     () => {
+      const stepperWrap = containerRef.current?.querySelector('[data-stepper-wrap]');
       const line = containerRef.current?.querySelector('[data-stepper-line]');
-      if (line) {
+      if (line && stepperWrap) {
         gsap.fromTo(
           line,
           { scaleX: 0 },
@@ -55,10 +57,11 @@ export const EVInvestmentPlanSection = () => {
             scaleX: 1,
             ease: 'none',
             scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top 75%',
+              trigger: stepperWrap,
+              start: 'top 80%',
               end: 'bottom 60%',
               scrub: 0.5,
+              invalidateOnRefresh: true,
             },
             transformOrigin: 'left center',
           }
@@ -73,8 +76,8 @@ export const EVInvestmentPlanSection = () => {
         ease: 'power2.out',
         stagger: 0.15,
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 75%',
+          trigger: stepperWrap,
+          start: 'top 85%',
         },
       });
 
@@ -87,10 +90,12 @@ export const EVInvestmentPlanSection = () => {
           ease: 'back.out(1.7)',
           scrollTrigger: {
             trigger: banner,
-            start: 'top 85%',
+            start: 'top 90%',
           },
         });
       }
+
+      scheduleScrollTriggerRefresh();
     },
     { scope: containerRef }
   );
@@ -104,7 +109,7 @@ export const EVInvestmentPlanSection = () => {
           description="A practical pathway to participate in India's growing electric-mobility ecosystem."
         />
 
-        <div className="relative mt-20">
+        <div className="relative mt-20" data-stepper-wrap>
           <div
             data-stepper-line
             className="absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-primary sm:left-1/2 sm:block sm:w-[calc(100%-6rem)] sm:-translate-x-1/2"
