@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
-import { Bike, Briefcase, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Bike, Briefcase, TrendingUp } from 'lucide-react';
 import { SectionHeading } from '@/components/shared/SectionHeading';
+import { Button } from '@/components/ui/button';
 import { useLeadModal } from '@/context/LeadModalContext';
 
 const PILLARS = [
@@ -8,7 +10,8 @@ const PILLARS = [
     icon: TrendingUp,
     title: 'Investor',
     tagline: 'Passive Income',
-    description: 'Own an EV asset, deploy it into our managed fleet, and earn predictable monthly returns.',
+    description:
+      'Own an EV asset, deploy it into our managed fleet, and earn predictable monthly returns.',
     interest: 'Investor' as const,
     href: '#investors',
     color: 'from-evos-green/20 to-transparent',
@@ -17,7 +20,8 @@ const PILLARS = [
     icon: Bike,
     title: 'Rider',
     tagline: 'Affordable Mobility',
-    description: 'Access maintenance-free EVs on flexible terms with insurance and a built-in job marketplace.',
+    description:
+      'Access maintenance-free EVs on flexible terms with insurance and a built-in job marketplace.',
     interest: 'Rider' as const,
     color: 'from-evos-blue/20 to-transparent',
   },
@@ -25,7 +29,8 @@ const PILLARS = [
     icon: Briefcase,
     title: 'Business',
     tagline: 'Fleet SaaS',
-    description: 'Run your delivery or mobility fleet on an AI-powered operating system built for scale.',
+    description:
+      'Run your delivery or mobility fleet on an AI-powered operating system built for scale.',
     interest: 'Business' as const,
     color: 'from-evos-cyan/20 to-transparent',
   },
@@ -73,6 +78,15 @@ export const WhyEvOS = () => {
               </p>
             </motion.button>
           ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <Button size="lg" variant="outline" asChild>
+            <Link to="/about">
+              More About Us
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

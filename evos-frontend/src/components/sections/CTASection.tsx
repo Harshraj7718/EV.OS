@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useLeadModal } from '@/context/LeadModalContext';
 
@@ -27,15 +28,15 @@ export const CTASection = () => {
             Ready to Shape India&apos;s EV Economy?
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg text-white/70">
-            Join the founding cohort of investors, riders and business partners building the
-            future of Indian mobility.
+            Join the founding cohort of investors, riders and business partners building the future
+            of Indian mobility.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button size="lg" className="glow-primary" asChild>
-              <a href="#investors">
+              <Link to="/investors">
                 Book a Demo
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
+              </Link>
             </Button>
             <Button
               size="lg"

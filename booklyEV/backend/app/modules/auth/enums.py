@@ -1,0 +1,7 @@
+import enum
+
+
+class VerificationPurpose(str, enum.Enum):
+    EMAIL_VERIFICATION = "EMAIL_VERIFICATION"
+    PHONE_VERIFICATION = "PHONE_VERIFICATION"
+    PASSWORD_RESET = "PASSWORD_RESET"

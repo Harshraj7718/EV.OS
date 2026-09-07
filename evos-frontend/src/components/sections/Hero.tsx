@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, PlayCircle } from 'lucide-react';
+import { ArrowRight, Download, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { HeroIllustration } from './HeroIllustration';
 
@@ -32,15 +32,15 @@ export const Hero = () => {
           </span>
 
           <h1 className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-            India&apos;s First{' '}
-            <span className="text-gradient">EV Investment + Fleet</span> Operating System
+            India&apos;s First <span className="text-gradient">EV Investment + Fleet</span>{' '}
+            Operating System
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
             Empowering investors, riders and businesses through one intelligent EV ecosystem.
           </p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col flex-wrap gap-4 sm:flex-row">
             <Button size="lg" className="glow-primary" asChild>
               <a href="#investors">
                 Book a Demo
@@ -51,6 +51,12 @@ export const Hero = () => {
               <a href="#why-evos">
                 <PlayCircle className="h-4 w-4" aria-hidden="true" />
                 Explore Platform
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <a href="/documents/Booklynk_EV_brochure.pdf" download="Booklynk_EV_brochure.pdf">
+                <Download className="h-4 w-4" aria-hidden="true" />
+                Download Brochure
               </a>
             </Button>
           </div>

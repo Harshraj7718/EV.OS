@@ -30,6 +30,9 @@ const RoadmapSection = lazy(() =>
 const FeaturesSection = lazy(() =>
   import('@/components/sections/FeaturesSection').then((m) => ({ default: m.FeaturesSection }))
 );
+const DocumentsSection = lazy(() =>
+  import('@/components/sections/DocumentsSection').then((m) => ({ default: m.DocumentsSection }))
+);
 const FAQSection = lazy(() =>
   import('@/components/sections/FAQSection').then((m) => ({ default: m.FAQSection }))
 );
@@ -52,6 +55,7 @@ export const Home = () => {
         <ComparisonSection />
         <RoadmapSection />
         <FeaturesSection />
+        <DocumentsSection />
         <FAQSection />
         <CTASection />
       </Suspense>

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLeadModal } from '@/context/LeadModalContext';
@@ -10,6 +11,9 @@ interface StakeholderFeature {
   label: string;
 }
 
+type StakeholderCta =
+  { type: 'link'; href: string } | { type: 'form'; interest: LeadFormValues['interest'] };
+
 interface StakeholderSectionProps {
   id: string;
   eyebrow: string;
@@ -17,7 +21,7 @@ interface StakeholderSectionProps {
   description: string;
   features: StakeholderFeature[];
   ctaLabel: string;
-  interest: LeadFormValues['interest'];
+  cta: StakeholderCta;
   reverse?: boolean;
   image: string;
   imageAlt: string;
@@ -30,7 +34,7 @@ export const StakeholderSection = ({
   description,
   features,
   ctaLabel,
-  interest,
+  cta,
   reverse = false,
   image,
   imageAlt,
@@ -74,9 +78,15 @@ export const StakeholderSection = ({
               ))}
             </ul>
 
-            <Button size="lg" className="mt-10" onClick={() => openModal(interest)}>
-              {ctaLabel}
-            </Button>
+            {cta.type === 'link' ? (
+              <Button size="lg" className="mt-10" asChild>
+                <Link to={cta.href}>{ctaLabel}</Link>
+              </Button>
+            ) : (
+              <Button size="lg" className="mt-10" onClick={() => openModal(cta.interest)}>
+                {ctaLabel}
+              </Button>
+            )}
           </motion.div>
 
           <motion.div

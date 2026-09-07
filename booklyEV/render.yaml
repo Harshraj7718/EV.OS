@@ -1,0 +1,58 @@
+# Render Blueprint — deploys the backend as a Docker web service plus a
+# managed Postgres instance. See docs/deployment.md for the full walkthrough
+# (including the manual-dashboard alternative if you'd rather not use a
+# Blueprint) and for what to do about the frontend, which this file does
+# not deploy.
+#
+# Usage: push this repo to GitHub/GitLab, then in the Render dashboard
+# choose "New +" -> "Blueprint" and point it at the repo. Render reads
+# this file and provisions everything below in one step.
+databases:
+  - name: booklynk-ev-db
+    plan: free
+    databaseName: booklynk_ev
+    user: booklynk
+
+services:
+  - type: web
+    name: booklynk-ev-backend
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/health
+    # Migrations + seed run on every boot, ahead of uvicorn — both are
+    # idempotent (alembic upgrade head / the seed functions all check
+    # before writing), so this is safe on restarts and horizontal scale,
+    # not just the first deploy. Runs on Render's Free plan, unlike
+    # preDeployCommand (a paid-plan-only field). `exec` hands off to
+    # uvicorn as PID 1 so Render's SIGTERM on redeploy/scale-down reaches
+    # it directly instead of being absorbed by the wrapping shell.
+    dockerCommand: >-
+      sh -c "alembic upgrade head && python -m app.seed && exec uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: LOG_LEVEL
+        value: INFO
+      # Render generates and stores a random value for this — never the
+      # checked-in .env.example placeholder. See core/config.py's
+      # startup guard, which refuses to boot with that placeholder (or
+      # anything under 32 chars) once ENVIRONMENT=production.
+      - key: SECRET_KEY
+        generateValue: true
+      # Render's connection string arrives as `postgresql://...` with no
+      # driver named; core/config.py rewrites it to `postgresql+psycopg://`
+      # automatically, so pasting it in as-is (via this fromDatabase link)
+      # just works.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: booklynk-ev-db
+          property: connectionString
+      # No default here on purpose — set this once you know where the
+      # frontend is deployed (a comma-separated list of origins, e.g.
+      # https://your-frontend.onrender.com). Render will prompt for it.
+      - key: CORS_ORIGINS
+        sync: false

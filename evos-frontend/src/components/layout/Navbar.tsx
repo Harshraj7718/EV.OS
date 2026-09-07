@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -8,12 +9,14 @@ import logo from '@/assets/logo-full.webp';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/#home' },
-  { label: 'Investors', href: '/#investors' },
-  { label: 'Riders', href: '/#riders' },
-  { label: 'Business', href: '/#business' },
-  { label: 'About', href: '/#why-evos' },
-  { label: 'FAQ', href: '/#faq' },
-  { label: 'Contact', href: '/#footer' },
+  { label: 'About', href: '/about' },
+  { label: 'Investors', href: '/investors' },
+  { label: 'Riders', href: '/riders' },
+  { label: 'Business', href: '/business' },
+  { label: 'Blog', href: '/blogs' },
+  { label: 'Resources', href: '/resources' },
+  { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const Navbar = () => {
@@ -38,7 +41,9 @@ export const Navbar = () => {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        scrolled ? 'bg-background/80 backdrop-blur-xl border-b border-border shadow-sm' : 'bg-transparent'
+        scrolled
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border shadow-sm'
+          : 'bg-transparent'
       )}
     >
       <nav className="container flex h-20 items-center justify-between" aria-label="Primary">
@@ -46,27 +51,36 @@ export const Navbar = () => {
           <img src={logo} alt="Booklynk EV" className="h-7 w-auto sm:h-8" />
         </a>
 
-        <ul className="hidden items-center gap-8 lg:flex">
+        <ul className="hidden items-center gap-5 xl:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </a>
+              {link.href.includes('#') ? (
+                <a
+                  href={link.href}
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  to={link.href}
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {link.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <ThemeToggle />
           <Button asChild>
-            <a href="/#investors">Book a Demo</a>
+            <Link to="/investors">Book a Demo</Link>
           </Button>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <ThemeToggle />
           <Button
             variant="ghost"
@@ -87,25 +101,35 @@ export const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="overflow-hidden border-t border-border bg-background/95 backdrop-blur-xl lg:hidden"
+            className="overflow-hidden border-t border-border bg-background/95 backdrop-blur-xl xl:hidden"
           >
             <ul className="container flex flex-col gap-1 py-4">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="block rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.includes('#') ? (
+                    <a
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="block rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="block rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
               <li className="pt-2">
                 <Button asChild className="w-full">
-                  <a href="/#investors" onClick={() => setMobileOpen(false)}>
+                  <Link to="/investors" onClick={() => setMobileOpen(false)}>
                     Book a Demo
-                  </a>
+                  </Link>
                 </Button>
               </li>
             </ul>

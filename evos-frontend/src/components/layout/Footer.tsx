@@ -3,10 +3,13 @@ import { Facebook, Instagram, Linkedin, X } from 'lucide-react';
 import logo from '@/assets/logo-full.webp';
 
 const QUICK_LINKS = [
-  { label: 'Investors', href: '/#investors' },
-  { label: 'Riders', href: '/#riders' },
-  { label: 'Business', href: '/#business' },
-  { label: 'FAQ', href: '/#faq' },
+  { label: 'Investors', href: '/investors' },
+  { label: 'Riders', href: '/riders' },
+  { label: 'Business', href: '/business' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Blog', href: '/blogs' },
+  { label: 'Resources', href: '/resources' },
+  { label: 'Testimonials', href: '/testimonials' },
 ];
 
 const SOCIALS = [
@@ -30,7 +33,10 @@ export const Footer = () => {
       <div className="container py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <a href="/#home" className="inline-flex items-center rounded-lg bg-white/95 px-3 py-1.5 shadow-sm">
+            <a
+              href="/#home"
+              className="inline-flex items-center rounded-lg bg-white/95 px-3 py-1.5 shadow-sm"
+            >
               <img src={logo} alt="Booklynk EV" className="h-8 w-auto" />
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
@@ -60,12 +66,12 @@ export const Footer = () => {
             <ul className="mt-4 space-y-3">
               {QUICK_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -93,12 +99,12 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a
-                  href="/#footer"
+                <Link
+                  to="/contact"
                   className="text-sm text-muted-foreground transition-colors hover:text-primary"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

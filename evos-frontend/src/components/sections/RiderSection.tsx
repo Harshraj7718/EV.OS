@@ -10,7 +10,11 @@ const FEATURES = [
   { icon: Briefcase, label: 'Job Marketplace' },
 ];
 
-export const RiderSection = () => {
+interface RiderSectionProps {
+  variant?: 'home' | 'page';
+}
+
+export const RiderSection = ({ variant = 'home' }: RiderSectionProps) => {
   return (
     <StakeholderSection
       id="riders"
@@ -19,7 +23,9 @@ export const RiderSection = () => {
       description="Get on the road with a maintenance-free EV, transparent daily earnings, and an integrated marketplace connecting you to gig opportunities."
       features={FEATURES}
       ctaLabel="Join as Rider"
-      interest="Rider"
+      cta={
+        variant === 'home' ? { type: 'link', href: '/riders' } : { type: 'form', interest: 'Rider' }
+      }
       image={rideImage}
       imageAlt="Booklynk EV rider earning on the road with the rider earnings dashboard"
       reverse

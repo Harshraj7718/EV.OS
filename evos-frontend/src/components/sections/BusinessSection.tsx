@@ -10,7 +10,11 @@ const FEATURES = [
   { icon: Wrench, label: 'Maintenance Alerts' },
 ];
 
-export const BusinessSection = () => {
+interface BusinessSectionProps {
+  variant?: 'home' | 'page';
+}
+
+export const BusinessSection = ({ variant = 'home' }: BusinessSectionProps) => {
   return (
     <StakeholderSection
       id="business"
@@ -19,7 +23,11 @@ export const BusinessSection = () => {
       description="Run your delivery or mobility fleet on an AI-powered dashboard with real-time GPS, battery intelligence, trip analytics and maintenance alerts."
       features={FEATURES}
       ctaLabel="Partner as Business"
-      interest="Business"
+      cta={
+        variant === 'home'
+          ? { type: 'link', href: '/business' }
+          : { type: 'form', interest: 'Business' }
+      }
       image={businessImage}
       imageAlt="Booklynk EV fleet management dashboard powering a business's electric scooter fleet"
     />

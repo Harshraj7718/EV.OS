@@ -9,6 +9,15 @@ import { LeadCaptureModal } from '@/components/LeadCaptureModal';
 import { PaymentModal } from '@/components/PaymentModal';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { Home } from '@/pages/Home';
+import { About } from '@/pages/About';
+import { Investors } from '@/pages/Investors';
+import { Riders } from '@/pages/Riders';
+import { Business } from '@/pages/Business';
+import { FAQ } from '@/pages/FAQ';
+import { Blogs } from '@/pages/Blogs';
+import { Resources } from '@/pages/Resources';
+import { Testimonials } from '@/pages/Testimonials';
+import { Contact } from '@/pages/Contact';
 import { PrivacyPolicy } from '@/pages/PrivacyPolicy';
 import { TermsOfService } from '@/pages/TermsOfService';
 import { NotFound } from '@/pages/NotFound';
@@ -24,6 +33,15 @@ function App() {
             <main className="flex-1">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/investors" element={<Investors />} />
+                <Route path="/riders" element={<Riders />} />
+                <Route path="/business" element={<Business />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/blogs" element={<Blogs />} />
+                <Route path="/resources" element={<Resources />} />
+                <Route path="/testimonials" element={<Testimonials />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="*" element={<NotFound />} />
