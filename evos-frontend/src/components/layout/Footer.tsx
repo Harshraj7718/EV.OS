@@ -1,14 +1,8 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, X } from 'lucide-react';
 import logo from '@/assets/logo-full.webp';
 import { COMPANY_ADDRESS_LINES, COMPANY_EMAIL, PHONE_NUMBERS, toTelHref } from '@/lib/contactInfo';
-import { scheduleScrollTriggerRefresh } from '@/lib/gsapRefresh';
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const QUICK_LINKS = [
   { label: 'Investors', href: '/investors' },
@@ -38,37 +32,56 @@ const SOCIALS = [
 export const Footer = () => {
   const footerRef = useRef<HTMLElement>(null);
 
-  useGSAP(
-    () => {
-      const phoneIcon = footerRef.current?.querySelector('[data-phone-icon]');
-      if (phoneIcon) {
-        gsap.to(phoneIcon, {
-          boxShadow: '0 0 0 6px rgba(0,230,118,0.18)',
-          duration: 1,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        });
-      }
+  // gsap/ScrollTrigger are loaded dynamically (rather than statically imported) so this
+  // purely decorative, below-the-fold animation doesn't block the site's initial JS payload —
+  // the Footer renders on every page, so a static import here would make gsap eager everywhere.
+  useEffect(() => {
+    let cancelled = false;
+    let cleanupAnimations: (() => void) | undefined;
 
-      const pin = footerRef.current?.querySelector('[data-pin-icon]');
-      if (pin) {
-        gsap.from(pin, {
-          y: -16,
-          opacity: 0,
-          duration: 0.6,
-          ease: 'bounce.out',
-          scrollTrigger: {
-            trigger: pin,
-            start: 'top 95%',
-          },
-        });
-      }
+    Promise.all([import('gsap'), import('gsap/ScrollTrigger'), import('@/lib/gsapRefresh')]).then(
+      ([{ gsap }, { ScrollTrigger }, { scheduleScrollTriggerRefresh }]) => {
+        if (cancelled || !footerRef.current) return;
+        gsap.registerPlugin(ScrollTrigger);
 
-      scheduleScrollTriggerRefresh();
-    },
-    { scope: footerRef }
-  );
+        const ctx = gsap.context(() => {
+          const phoneIcon = footerRef.current?.querySelector('[data-phone-icon]');
+          if (phoneIcon) {
+            gsap.to(phoneIcon, {
+              boxShadow: '0 0 0 6px rgba(0,230,118,0.18)',
+              duration: 1,
+              repeat: -1,
+              yoyo: true,
+              ease: 'sine.inOut',
+            });
+          }
+
+          const pin = footerRef.current?.querySelector('[data-pin-icon]');
+          if (pin) {
+            gsap.from(pin, {
+              y: -16,
+              opacity: 0,
+              duration: 0.6,
+              ease: 'bounce.out',
+              scrollTrigger: {
+                trigger: pin,
+                start: 'top 95%',
+              },
+            });
+          }
+
+          scheduleScrollTriggerRefresh();
+        }, footerRef);
+
+        cleanupAnimations = () => ctx.revert();
+      }
+    );
+
+    return () => {
+      cancelled = true;
+      cleanupAnimations?.();
+    };
+  }, []);
 
   return (
     <footer id="footer" className="border-t border-border bg-card" ref={footerRef}>

@@ -16,10 +16,13 @@ export default defineConfig({
       output: {
         manualChunks(id: string) {
           if (id.includes('node_modules')) {
+            if (id.includes('three')) return 'three';
+            if (id.includes('gsap')) return 'gsap';
             if (id.includes('framer-motion')) return 'motion';
-            if (id.includes('react-hook-form') || id.includes('@hookform') || id.includes('zod')) {
-              return 'forms';
-            }
+            // react-hook-form/zod are intentionally NOT grouped into a shared chunk here:
+            // they're only used behind lazy boundaries (Contact, PaymentModal, LeadCaptureModal),
+            // and a shared chunk across multiple lazy entry points gets modulepreloaded by Vite
+            // on every page, defeating the lazy-loading. Each lazy chunk bundles its own copy.
             if (id.includes('react-router-dom') || id.includes('react-dom') || id.includes('/react/')) {
               return 'vendor';
             }

@@ -30,6 +30,7 @@ import {
 } from '@/lib/validation/payment.schema';
 import { formatINR } from '@/lib/plans';
 import { apiClient, getApiErrorMessage } from '@/lib/api';
+import { loadRazorpayScript } from '@/lib/loadRazorpay';
 import type { RazorpayCheckoutResponse } from '@/types/razorpay';
 import type { BankTransferDetails } from '@/types/bankTransfer';
 
@@ -80,6 +81,7 @@ export const PaymentModal = () => {
       setInvoiceFile(null);
       setInvoiceError(null);
       reset(paymentFormDefaultValues);
+      void loadRazorpayScript();
     }
   }, [isOpen, reset]);
 
@@ -94,14 +96,17 @@ export const PaymentModal = () => {
   const startRazorpayCheckout = async (values: PaymentFormValues) => {
     if (!selectedPlan) return;
 
-    if (typeof window.Razorpay === 'undefined') {
+    setIsProcessing(true);
+
+    try {
+      await loadRazorpayScript();
+    } catch {
+      setIsProcessing(false);
       toast.error('Payment gateway failed to load', {
-        description: 'Please refresh the page and try again.',
+        description: 'Please check your connection and try again.',
       });
       return;
     }
-
-    setIsProcessing(true);
 
     try {
       const { data } = await apiClient.post<{ data: CreateOrderResponse }>(
