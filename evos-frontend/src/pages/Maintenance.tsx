@@ -1,5 +1,14 @@
 import { lazy, Suspense } from 'react';
 import { Wrench } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/components/ui/empty';
 import logo from '@/assets/logo-full.webp';
 import { COMPANY_EMAIL } from '@/lib/contactInfo';
 
@@ -9,7 +18,7 @@ const DotGridBackground = lazy(() =>
 
 export const Maintenance = () => {
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-6 text-center">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-6">
       <Suspense fallback={null}>
         <DotGridBackground className="pointer-events-none fixed inset-0 -z-10 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black_40%,transparent_100%)]" />
       </Suspense>
@@ -21,23 +30,26 @@ export const Maintenance = () => {
         <img src={logo} alt="Booklynk EV" className="h-8 w-auto" />
       </a>
 
-      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-        <Wrench className="h-6 w-6" aria-hidden="true" />
-      </div>
-
-      <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
-        We&apos;ll be back shortly
-      </h1>
-      <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-        Booklynk EV is currently undergoing scheduled maintenance to make things better. We
-        won&apos;t be long — please check back soon.
-      </p>
-      <p className="mt-6 text-sm text-muted-foreground">
-        Urgent query?{' '}
-        <a href={`mailto:${COMPANY_EMAIL}`} className="text-primary hover:underline">
-          {COMPANY_EMAIL}
-        </a>
-      </p>
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon" className="h-14 w-14 rounded-full bg-primary/10 text-primary">
+            <Wrench className="h-6 w-6" aria-hidden="true" />
+          </EmptyMedia>
+          <EmptyTitle>We&apos;ll be back shortly</EmptyTitle>
+          <EmptyDescription>
+            Booklynk EV is currently undergoing scheduled maintenance to make things better. We
+            won&apos;t be long — please check back soon.
+          </EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent className="flex-row justify-center gap-3">
+          <Button size="sm" onClick={() => window.location.reload()}>
+            Refresh Page
+          </Button>
+          <Button size="sm" variant="outline" asChild>
+            <a href={`mailto:${COMPANY_EMAIL}`}>Email Us</a>
+          </Button>
+        </EmptyContent>
+      </Empty>
     </div>
   );
 };
