@@ -2,10 +2,16 @@ import { motion } from 'framer-motion';
 import { PageHero } from '@/components/shared/PageHero';
 import { VideoTestimonialsSection } from '@/components/sections/VideoTestimonialsSection';
 import { CTASection } from '@/components/sections/CTASection';
+import { SEO } from '@/components/shared/SEO';
 
 export const Testimonials = () => {
   return (
     <div>
+      <SEO
+        title="Investor Reviews & Testimonials | Booklynk EV"
+        description="Hear directly from Booklynk EV investors about their experience with EV investment plans, monthly rental income and fleet deployment."
+        path="/testimonials"
+      />
       <PageHero
         eyebrow="Investor Reviews"
         title="Hear From Our Investors"

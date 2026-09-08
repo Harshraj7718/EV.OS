@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { CalendarDays, Clock } from 'lucide-react';
 import { PageHero } from '@/components/shared/PageHero';
 import { CTASection } from '@/components/sections/CTASection';
+import { SEO } from '@/components/shared/SEO';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface BlogPost {
@@ -74,6 +75,11 @@ export const Blogs = () => {
 
   return (
     <div>
+      <SEO
+        title="Blog | Booklynk EV"
+        description="Notes from the Booklynk EV team on the EV investment model, fleet operations, and where India's electric-mobility industry is headed."
+        path="/blogs"
+      />
       <PageHero
         eyebrow="Blog"
         title="Insights on EV Investing & Fleet Operations"

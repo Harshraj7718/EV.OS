@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Hero } from '@/components/sections/Hero';
 import { TrustSection } from '@/components/sections/TrustSection';
 import { SectionFallback } from '@/components/shared/SectionFallback';
+import { SEO } from '@/components/shared/SEO';
 
 const DeliveryEcosystemSection = lazy(() =>
   import('@/components/sections/DeliveryEcosystemSection').then((m) => ({
@@ -60,6 +61,11 @@ const CTASection = lazy(() =>
 export const Home = () => {
   return (
     <>
+      <SEO
+        title="Booklynk EV — India's EV Investment + Fleet Operating System"
+        description="Booklynk EV is the operating system for India's EV economy. Invest in electric vehicles, ride affordably, or power your fleet business — one intelligent platform for investors, riders and businesses."
+        path="/"
+      />
       <Hero />
       <TrustSection />
       <Suspense fallback={<SectionFallback />}>

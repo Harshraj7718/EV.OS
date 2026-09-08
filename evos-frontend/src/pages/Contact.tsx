@@ -7,6 +7,7 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, X } from 'lucide-react';
 import { PageHero } from '@/components/shared/PageHero';
+import { SEO } from '@/components/shared/SEO';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -108,6 +109,11 @@ export const Contact = () => {
 
   return (
     <div>
+      <SEO
+        title="Contact Us | Booklynk EV"
+        description="Questions about investing, riding, or partnering your fleet with Booklynk EV? Reach out by phone, email, or send us a message."
+        path="/contact"
+      />
       <PageHero
         eyebrow="Contact"
         title="Get in Touch"

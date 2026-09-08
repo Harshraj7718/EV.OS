@@ -9,7 +9,6 @@ export const Hero = () => {
       id="home"
       className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-20"
     >
-      <div className="absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_60%_60%_at_50%_0%,black_40%,transparent_100%)]" />
       <motion.div
         className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-evos-green/20 blur-[120px]"
         animate={{ opacity: [0.4, 0.8, 0.4] }}

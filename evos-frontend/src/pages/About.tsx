@@ -13,6 +13,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { TrustSection } from '@/components/sections/TrustSection';
+import { SEO } from '@/components/shared/SEO';
 import { useLeadModal } from '@/context/LeadModalContext';
 import evImage from '@/assets/EV.webp';
 
@@ -82,6 +83,11 @@ export const About = () => {
 
   return (
     <div>
+      <SEO
+        title="About Us | Booklynk EV"
+        description="Booklynk EV connects investors, riders and businesses into a single intelligent platform — turning electric vehicles into a shared source of passive income, affordable mobility, and fleet-scale operations."
+        path="/about"
+      />
       <section className="pb-20 pt-32 sm:pt-40">
         <div className="container">
           <motion.div

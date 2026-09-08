@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/context/ThemeContext';
@@ -5,6 +6,7 @@ import { LeadModalProvider } from '@/context/LeadModalContext';
 import { PaymentModalProvider } from '@/context/PaymentModalContext';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { DotGridBackground } from '@/components/ui/dot-grid-background';
 import { LeadCaptureModal } from '@/components/LeadCaptureModal';
 import { PaymentModal } from '@/components/PaymentModal';
 import { ScrollToTop } from '@/components/ScrollToTop';
@@ -23,11 +25,16 @@ import { TermsOfService } from '@/pages/TermsOfService';
 import { NotFound } from '@/pages/NotFound';
 
 function App() {
+  useEffect(() => {
+    document.querySelectorAll('[data-rh-fallback]').forEach((el) => el.remove());
+  }, []);
+
   return (
     <ThemeProvider>
       <LeadModalProvider>
         <PaymentModalProvider>
           <ScrollToTop />
+          <DotGridBackground className="pointer-events-none fixed inset-0 -z-10 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_0%,black_40%,transparent_100%)]" />
           <div className="flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">

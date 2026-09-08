@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/accordion';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 
-const FAQS = [
+export const FAQS = [
   {
     question: 'What is the Booklynk EV business model?',
     answer:
