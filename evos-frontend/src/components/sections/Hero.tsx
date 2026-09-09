@@ -42,7 +42,7 @@ export const Hero = () => {
           <div className="mt-10 flex flex-col flex-wrap gap-4 sm:flex-row">
             <Button size="lg" className="glow-primary" asChild>
               <a href="#investors">
-                Book a Demo
+                Invest Now
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </Button>
@@ -59,24 +59,6 @@ export const Hero = () => {
               </a>
             </Button>
           </div>
-
-          <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t border-border pt-8">
-            <div>
-              <dt className="sr-only">Investors</dt>
-              <dd className="font-display text-2xl font-bold">1000+</dd>
-              <dd className="text-xs text-muted-foreground">Investors</dd>
-            </div>
-            <div>
-              <dt className="sr-only">Riders</dt>
-              <dd className="font-display text-2xl font-bold">5000+</dd>
-              <dd className="text-xs text-muted-foreground">Riders</dd>
-            </div>
-            <div>
-              <dt className="sr-only">Partners</dt>
-              <dd className="font-display text-2xl font-bold">100+</dd>
-              <dd className="text-xs text-muted-foreground">Partners</dd>
-            </div>
-          </dl>
         </motion.div>
 
         <motion.div

@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import evScooterImage from '@/assets/EV.webp';
+import evScooterImage from '@/assets/scooter.webp';
 
 export const HeroIllustration = () => {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-lg">
+    <div className="relative mx-auto aspect-[1386/1135] w-full max-w-xl">
       <motion.div
         className="absolute inset-0 rounded-full bg-gradient-to-br from-evos-green/20 via-evos-blue/10 to-transparent blur-3xl"
         animate={{ scale: [1, 1.08, 1] }}

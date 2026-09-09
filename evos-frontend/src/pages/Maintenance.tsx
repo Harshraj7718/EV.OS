@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/empty';
 import logo from '@/assets/logo-full.webp';
 import { COMPANY_EMAIL } from '@/lib/contactInfo';
+import { SEO } from '@/components/shared/SEO';
 
 const DotGridBackground = lazy(() =>
   import('@/components/ui/dot-grid-background').then((m) => ({ default: m.DotGridBackground }))
@@ -19,6 +20,12 @@ const DotGridBackground = lazy(() =>
 export const Maintenance = () => {
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-6">
+      <SEO
+        title="Booklynk EV — Down for Maintenance"
+        description="Booklynk EV is currently undergoing scheduled maintenance. We'll be back shortly."
+        path="/"
+        noindex
+      />
       <Suspense fallback={null}>
         <DotGridBackground className="pointer-events-none fixed inset-0 -z-10 [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black_40%,transparent_100%)]" />
       </Suspense>

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { cn } from '@/lib/utils';
 
 interface DotGridBackgroundProps {
   className?: string;
@@ -78,7 +79,6 @@ export function DotGridBackground({ className }: DotGridBackgroundProps) {
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -86,7 +86,7 @@ export function DotGridBackground({ className }: DotGridBackgroundProps) {
     const brandColor = new THREE.Vector3(...BRAND_GREEN);
     const uniforms = {
       u_time: { value: 0 },
-      u_resolution: { value: new THREE.Vector2(window.innerWidth * 2, window.innerHeight * 2) },
+      u_resolution: { value: new THREE.Vector2(1, 1) },
       u_opacities: { value: [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1.0] },
       u_colors: { value: [brandColor, brandColor, brandColor, brandColor, brandColor, brandColor] },
       u_total_size: { value: 20.0 },
@@ -108,6 +108,14 @@ export function DotGridBackground({ className }: DotGridBackgroundProps) {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
+    const resize = () => {
+      const width = canvas.clientWidth || window.innerWidth;
+      const height = canvas.clientHeight || window.innerHeight;
+      renderer.setSize(width, height, false);
+      uniforms.u_resolution.value.set(width * 2, height * 2);
+    };
+    resize();
+
     const startTime = performance.now();
     let animationId: number;
     const animate = () => {
@@ -117,14 +125,11 @@ export function DotGridBackground({ className }: DotGridBackgroundProps) {
     };
     animate();
 
-    const handleResize = () => {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      uniforms.u_resolution.value.set(window.innerWidth * 2, window.innerHeight * 2);
-    };
-    window.addEventListener('resize', handleResize);
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(canvas);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
       cancelAnimationFrame(animationId);
       renderer.dispose();
       geometry.dispose();
@@ -132,5 +137,5 @@ export function DotGridBackground({ className }: DotGridBackgroundProps) {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className={className} />;
+  return <canvas ref={canvasRef} className={cn('h-full w-full', className)} />;
 }

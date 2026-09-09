@@ -1,4 +1,5 @@
 import { InvestorSection } from '@/components/sections/InvestorSection';
+import { InvestmentStepperSection } from '@/components/sections/InvestmentStepperSection';
 import { EVInvestmentPlanSection } from '@/components/sections/EVInvestmentPlanSection';
 import { InvestmentPlansSection } from '@/components/sections/InvestmentPlansSection';
 import { EVSpecsSection } from '@/components/sections/EVSpecsSection';
@@ -13,10 +14,11 @@ export const Investors = () => (
       path="/investors"
     />
     <InvestorSection variant="page" />
+    <InvestmentStepperSection />
     <EVInvestmentPlanSection />
     <InvestmentPlansSection />
     <EVSpecsSection />
-    <CTASection />
+    <CTASection primaryCtaLabel="Invest Now" />
   </div>
 );
 

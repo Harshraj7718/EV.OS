@@ -1,10 +1,19 @@
+import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useLeadModal } from '@/context/LeadModalContext';
 
-export const CTASection = () => {
+const DotGridBackground = lazy(() =>
+  import('@/components/ui/dot-grid-background').then((m) => ({ default: m.DotGridBackground }))
+);
+
+interface CTASectionProps {
+  primaryCtaLabel?: string;
+}
+
+export const CTASection = ({ primaryCtaLabel = 'Book a Demo' }: CTASectionProps) => {
   const { openModal } = useLeadModal();
 
   return (
@@ -17,13 +26,9 @@ export const CTASection = () => {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-evos-black via-evos-surface to-evos-black px-8 py-20 text-center sm:px-16"
         >
-          <div
-            className="absolute inset-0 -z-10 bg-[length:200%_200%] opacity-40 animate-gradient-move"
-            style={{
-              backgroundImage:
-                'linear-gradient(120deg, rgba(0,230,118,0.35), rgba(0,229,255,0.25), rgba(24,255,255,0.3))',
-            }}
-          />
+          <Suspense fallback={null}>
+            <DotGridBackground className="pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,black_40%,transparent_100%)]" />
+          </Suspense>
           <h2 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
             Ready to Shape India&apos;s EV Economy?
           </h2>
@@ -34,7 +39,7 @@ export const CTASection = () => {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button size="lg" className="glow-primary" asChild>
               <Link to="/investors">
-                Book a Demo
+                {primaryCtaLabel}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>

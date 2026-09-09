@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Eye, FileText } from 'lucide-react';
 import { SectionHeading } from '@/components/shared/SectionHeading';
+import { HeroWatermark } from '@/components/shared/HeroWatermark';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
@@ -27,17 +28,24 @@ const DOCUMENTS: DocumentItem[] = [
   },
 ];
 
-export const DocumentsSection = () => {
+interface DocumentsSectionProps {
+  showWatermark?: boolean;
+}
+
+export const DocumentsSection = ({ showWatermark = false }: DocumentsSectionProps) => {
   const [previewDoc, setPreviewDoc] = useState<DocumentItem | null>(null);
 
   return (
     <section id="documents" className="border-y border-border bg-muted/30 py-24 sm:py-32">
       <div className="container">
-        <SectionHeading
-          eyebrow="Resources"
-          title="Brochure & Draft Agreement"
-          description="Download our company brochure and review the draft investment agreement before you commit."
-        />
+        <div className="relative min-h-[220px] overflow-hidden sm:min-h-[280px]">
+          {showWatermark && <HeroWatermark text="Resources" />}
+          <SectionHeading
+            eyebrow="Resources"
+            title="Brochure & Draft Agreement"
+            description="Download our company brochure and review the draft investment agreement before you commit."
+          />
+        </div>
 
         <div className="mx-auto mt-14 grid max-w-3xl gap-5 sm:grid-cols-2">
           {DOCUMENTS.map((doc, index) => (
@@ -47,7 +55,7 @@ export const DocumentsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.4, delay: index * 0.08, ease: 'easeOut' }}
-              className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/10"
+              className="glass flex flex-col rounded-2xl p-6 transition-shadow hover:shadow-lg hover:shadow-primary/10"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <FileText className="h-6 w-6" aria-hidden="true" />

@@ -88,7 +88,7 @@ export const EVSpecsSection = () => {
         <div className="mt-16 grid gap-8 lg:grid-cols-2">
           <div
             data-spec-card
-            className="overflow-hidden rounded-3xl border border-border bg-card shadow-xl"
+            className="glass overflow-hidden rounded-3xl shadow-xl"
           >
             <div className="border-b border-border bg-gradient-to-br from-evos-black via-evos-surface to-evos-black px-8 py-6">
               <span className="text-xs font-semibold uppercase tracking-widest text-evos-green">
@@ -110,7 +110,7 @@ export const EVSpecsSection = () => {
 
           <div
             data-spec-card
-            className="overflow-hidden rounded-3xl border border-primary/40 bg-card shadow-xl shadow-primary/10"
+            className="overflow-hidden rounded-3xl border border-primary/40 bg-card/60 shadow-xl shadow-primary/10 backdrop-blur-xl"
           >
             <div className="border-b border-border bg-gradient-to-br from-evos-black via-evos-surface to-evos-black px-8 py-6">
               <span className="text-xs font-semibold uppercase tracking-widest text-evos-green">

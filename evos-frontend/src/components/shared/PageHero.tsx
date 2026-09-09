@@ -1,15 +1,18 @@
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
+import { HeroWatermark } from '@/components/shared/HeroWatermark';
 
 interface PageHeroProps {
   eyebrow: string;
   title: string;
   description?: string;
+  watermark?: string;
   children?: ReactNode;
 }
 
-export const PageHero = ({ eyebrow, title, description, children }: PageHeroProps) => (
-  <section className="pb-16 pt-32 sm:pt-40">
+export const PageHero = ({ eyebrow, title, description, watermark, children }: PageHeroProps) => (
+  <section className="relative overflow-hidden pb-16 pt-32 sm:pt-40">
+    {watermark && <HeroWatermark text={watermark} />}
     <div className="container">
       <motion.div
         initial={{ opacity: 0, y: 24 }}

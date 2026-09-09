@@ -9,7 +9,12 @@ export const PrivacyPolicy = () => {
         description="Learn what personal information Booklynk EV collects, how we use it, and the choices you have when using our EV investment and fleet platform."
         path="/privacy"
       />
-      <LegalPageLayout eyebrow="Legal" title="Privacy Policy" lastUpdated="21 July 2026">
+      <LegalPageLayout
+        eyebrow="Legal"
+        title="Privacy Policy"
+        lastUpdated="21 July 2026"
+        watermark="Privacy"
+      >
         <LegalSection title="1. Introduction">
           <p>
             Booklynk EV ("Booklynk EV", "we", "us", or "our") operates booklynkev.com and the

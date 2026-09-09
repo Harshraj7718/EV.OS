@@ -9,7 +9,12 @@ export const TermsOfService = () => {
         description="Read the terms governing your access to and use of Booklynk EV's EV investment and fleet operations platform."
         path="/terms"
       />
-      <LegalPageLayout eyebrow="Legal" title="Terms of Service" lastUpdated="21 July 2026">
+      <LegalPageLayout
+        eyebrow="Legal"
+        title="Terms of Service"
+        lastUpdated="21 July 2026"
+        watermark="Terms"
+      >
         <LegalSection title="1. Acceptance of Terms">
           <p>
             These Terms of Service ("Terms") govern your access to and use of booklynkev.com and the

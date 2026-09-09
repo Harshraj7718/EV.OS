@@ -132,7 +132,7 @@ export const BatterySwappingSection = () => {
         </div>
 
         <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2">
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
+          <div className="glass flex flex-col items-center justify-center rounded-2xl p-8 text-center">
             <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
               Starting Investment
             </span>
@@ -183,7 +183,7 @@ export const BatterySwappingSection = () => {
           </div>
         </div>
 
-        <div className="mx-auto mt-14 max-w-2xl rounded-xl border border-dashed border-border bg-card px-6 py-4 text-center text-xs leading-relaxed text-muted-foreground">
+        <div className="glass mx-auto mt-14 max-w-2xl rounded-xl border-dashed px-6 py-4 text-center text-xs leading-relaxed text-muted-foreground">
           Coming soon. Final franchise structure, inclusions, eligibility, and commercial terms will
           be announced separately. Investment involves risk; review all applicable information
           before participating.

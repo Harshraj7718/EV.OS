@@ -19,7 +19,7 @@ export const ComparisonSection = () => {
           description="Legacy EV rental models cap your upside. Booklynk EV is built as an infrastructure platform from day one."
         />
 
-        <div className="mx-auto mt-16 max-w-3xl overflow-hidden rounded-2xl border border-border shadow-sm">
+        <div className="glass mx-auto mt-16 max-w-3xl overflow-hidden rounded-2xl">
           <div className="grid grid-cols-2 divide-x divide-border">
             <div className="bg-muted/50 px-6 py-5">
               <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-muted-foreground">

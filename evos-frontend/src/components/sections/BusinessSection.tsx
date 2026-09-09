@@ -30,6 +30,7 @@ export const BusinessSection = ({ variant = 'home' }: BusinessSectionProps) => {
       }
       image={businessImage}
       imageAlt="Booklynk EV fleet management dashboard powering a business's electric scooter fleet"
+      watermarkText={variant === 'page' ? 'Business' : undefined}
     />
   );
 };

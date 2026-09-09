@@ -9,7 +9,7 @@ export const Resources = () => (
       description="Download the Booklynk EV brochure and access investment documentation, agreements and resources for investors, riders and business partners."
       path="/resources"
     />
-    <DocumentsSection />
+    <DocumentsSection showWatermark />
     <CTASection />
   </div>
 );

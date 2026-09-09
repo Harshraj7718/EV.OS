@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { SectionHeading } from '@/components/shared/SectionHeading';
+import { HeroWatermark } from '@/components/shared/HeroWatermark';
 
 export const FAQS = [
   {
@@ -132,11 +133,18 @@ export const FAQS = [
   },
 ];
 
-export const FAQSection = () => {
+interface FAQSectionProps {
+  showWatermark?: boolean;
+}
+
+export const FAQSection = ({ showWatermark = false }: FAQSectionProps) => {
   return (
     <section id="faq" className="py-24 sm:py-32">
       <div className="container">
-        <SectionHeading eyebrow="FAQ" title="Frequently Asked Questions" />
+        <div className="relative min-h-[200px] overflow-hidden sm:min-h-[260px]">
+          {showWatermark && <HeroWatermark text="FAQ" />}
+          <SectionHeading eyebrow="FAQ" title="Frequently Asked Questions" />
+        </div>
 
         <div className="mx-auto mt-14 max-w-3xl">
           <Accordion type="single" collapsible className="w-full">

@@ -35,7 +35,7 @@ export const VideoTestimonialsSection = ({ showHeading = true }: VideoTestimonia
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
-              className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
+              className="glass overflow-hidden rounded-2xl"
             >
               {/* eslint-disable-next-line jsx-a11y/media-has-caption -- no caption track available for these testimonial clips yet */}
               <video

@@ -84,6 +84,7 @@ export const Blogs = () => {
         eyebrow="Blog"
         title="Insights on EV Investing & Fleet Operations"
         description="Notes from the Booklynk EV team on the EV investment model, fleet operations, and where the industry is headed."
+        watermark="Blog"
       />
 
       <section className="pb-24 sm:pb-32">
@@ -99,7 +100,7 @@ export const Blogs = () => {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.4, delay: index * 0.08, ease: 'easeOut' }}
                 whileHover={{ y: -6 }}
-                className="flex flex-col rounded-2xl border border-border bg-card p-6 text-left shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/10"
+                className="glass flex flex-col rounded-2xl p-6 text-left transition-shadow hover:shadow-lg hover:shadow-primary/10"
               >
                 <div className="flex items-center gap-4 text-xs text-muted-foreground">
                   <span className="inline-flex items-center gap-1.5">

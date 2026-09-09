@@ -29,6 +29,7 @@ export const RiderSection = ({ variant = 'home' }: RiderSectionProps) => {
       image={rideImage}
       imageAlt="Booklynk EV rider earning on the road with the rider earnings dashboard"
       reverse
+      watermarkText={variant === 'page' ? 'Ride' : undefined}
     />
   );
 };

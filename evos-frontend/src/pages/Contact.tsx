@@ -118,6 +118,7 @@ export const Contact = () => {
         eyebrow="Contact"
         title="Get in Touch"
         description="Questions about investing, riding, or partnering your fleet with Booklynk EV? Send us a message."
+        watermark="Contact"
       />
 
       <section className="pb-24 sm:pb-32">
@@ -128,7 +129,7 @@ export const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="lg:col-span-3 rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8"
+              className="glass lg:col-span-3 rounded-2xl p-6 sm:p-8"
             >
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -239,7 +240,7 @@ export const Contact = () => {
               transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
               className="lg:col-span-2 space-y-6"
             >
-              <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <div className="glass space-y-6 rounded-2xl p-6">
                 <div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     <Mail className="h-5 w-5" aria-hidden="true" />
@@ -295,7 +296,7 @@ export const Contact = () => {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <div className="glass rounded-2xl p-6">
                 <h3 className="font-display text-lg font-semibold">Follow Us</h3>
                 <div className="mt-4 flex items-center gap-3">
                   {SOCIALS.map((social) => (

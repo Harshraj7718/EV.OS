@@ -42,7 +42,7 @@ export const InvestmentPlansSection = () => {
                 transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
                 whileHover={{ y: -8 }}
                 className={cn(
-                  'relative flex flex-col overflow-hidden rounded-2xl border bg-card p-8 shadow-sm transition-shadow hover:shadow-xl',
+                  'relative flex flex-col overflow-hidden rounded-2xl border bg-card/60 p-8 shadow-sm backdrop-blur-xl transition-shadow hover:shadow-xl',
                   plan.highlighted
                     ? 'border-primary/50 shadow-lg shadow-primary/10 hover:shadow-primary/20'
                     : 'border-border hover:shadow-primary/10'
@@ -106,7 +106,7 @@ export const InvestmentPlansSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
-          className="mx-auto mt-8 max-w-3xl rounded-2xl border border-dashed border-primary/40 bg-card p-8 text-center"
+          className="mx-auto mt-8 max-w-3xl rounded-2xl border border-dashed border-primary/40 bg-card/60 p-8 text-center backdrop-blur-xl"
         >
           <h3 className="font-display text-2xl font-bold">Need a Custom Fleet?</h3>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">

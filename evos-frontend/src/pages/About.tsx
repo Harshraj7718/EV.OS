@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { TrustSection } from '@/components/sections/TrustSection';
 import { SEO } from '@/components/shared/SEO';
+import { HeroWatermark } from '@/components/shared/HeroWatermark';
 import { useLeadModal } from '@/context/LeadModalContext';
 import evImage from '@/assets/EV.webp';
 
@@ -88,7 +89,8 @@ export const About = () => {
         description="Booklynk EV connects investors, riders and businesses into a single intelligent platform — turning electric vehicles into a shared source of passive income, affordable mobility, and fleet-scale operations."
         path="/about"
       />
-      <section className="pb-20 pt-32 sm:pt-40">
+      <section className="relative overflow-hidden pb-20 pt-32 sm:pt-40">
+        <HeroWatermark text="About" />
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -109,7 +111,7 @@ export const About = () => {
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Button size="lg" onClick={() => openModal('Investor')}>
-                Book a Demo
+                Invest Now
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>
               <Button size="lg" variant="outline" asChild>
@@ -227,7 +229,7 @@ export const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.4, delay: index * 0.08, ease: 'easeOut' }}
-                className="flex items-start gap-3 rounded-xl border border-border bg-card p-5"
+                className="glass flex items-start gap-3 rounded-xl p-5"
               >
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
                 <span className="text-sm font-medium leading-relaxed sm:text-base">{point}</span>
@@ -264,7 +266,7 @@ export const About = () => {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
                 whileHover={{ y: -8 }}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 text-left shadow-sm transition-shadow hover:shadow-xl hover:shadow-primary/10"
+                className="glass group relative overflow-hidden rounded-2xl p-8 text-left transition-shadow hover:shadow-xl hover:shadow-primary/10"
               >
                 <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
                   <item.icon className="h-7 w-7" aria-hidden="true" />
@@ -324,7 +326,7 @@ export const About = () => {
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button size="lg" className="glow-primary" onClick={() => openModal('Investor')}>
-                Book a Demo
+                Invest Now
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>
               <Button

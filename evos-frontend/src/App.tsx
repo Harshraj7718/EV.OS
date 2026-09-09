@@ -10,6 +10,7 @@ import { ScrollToTop } from '@/components/ScrollToTop';
 import { SectionFallback } from '@/components/shared/SectionFallback';
 import { LeadCaptureModalLazy } from '@/components/LeadCaptureModalLazy';
 import { PaymentModalLazy } from '@/components/PaymentModalLazy';
+import { WhatsAppWidget } from '@/components/WhatsAppWidget';
 
 const Home = lazy(() => import('@/pages/Home').then((m) => ({ default: m.Home })));
 const About = lazy(() => import('@/pages/About').then((m) => ({ default: m.About })));
@@ -90,6 +91,7 @@ function App() {
           </div>
           <LeadCaptureModalLazy />
           <PaymentModalLazy />
+          <WhatsAppWidget />
           <Toaster richColors position="top-right" closeButton />
         </PaymentModalProvider>
       </LeadModalProvider>

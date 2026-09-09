@@ -50,6 +50,7 @@ export const InvestorSection = ({ variant = 'home' }: InvestorSectionProps) => {
         }
         image={investImage}
         imageAlt="Invest in India's EV future — Booklynk EV investor fleet illustration"
+        watermarkText={variant === 'page' ? 'Invest' : undefined}
       />
 
       <div className="pb-24 sm:pb-32">
@@ -59,7 +60,7 @@ export const InvestorSection = ({ variant = 'home' }: InvestorSectionProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="rounded-3xl border border-border bg-card p-8 shadow-sm sm:p-10"
+            className="glass rounded-3xl p-8 sm:p-10"
           >
             <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
               <div>

@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { SEO } from '@/components/shared/SEO';
+import { HeroWatermark } from '@/components/shared/HeroWatermark';
 
 export const NotFound = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 text-center">
+    <div className="relative flex min-h-screen flex-col items-center justify-center gap-6 overflow-hidden px-6 text-center">
       <SEO
         title="Page Not Found | Booklynk EV"
         description="The page you're looking for may have been moved or never existed."
         path="/404"
         noindex
       />
+      <HeroWatermark text="404" />
       <span className="font-display text-sm font-semibold uppercase tracking-widest text-primary">
         404 Error
       </span>

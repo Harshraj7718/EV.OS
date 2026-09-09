@@ -41,7 +41,7 @@ export const FeaturesSection = () => {
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.4, delay: (index % 4) * 0.08, ease: 'easeOut' }}
               whileHover={{ y: -6 }}
-              className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-lg hover:shadow-primary/10"
+              className="glass rounded-2xl p-6 transition-shadow hover:shadow-lg hover:shadow-primary/10"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <feature.icon className="h-6 w-6" aria-hidden="true" />

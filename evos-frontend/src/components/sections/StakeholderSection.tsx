@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { HeroWatermark } from '@/components/shared/HeroWatermark';
 import { useLeadModal } from '@/context/LeadModalContext';
 import { cn } from '@/lib/utils';
 import type { LeadFormValues } from '@/lib/validation/lead.schema';
@@ -25,6 +26,7 @@ interface StakeholderSectionProps {
   reverse?: boolean;
   image: string;
   imageAlt: string;
+  watermarkText?: string;
 }
 
 export const StakeholderSection = ({
@@ -38,6 +40,7 @@ export const StakeholderSection = ({
   reverse = false,
   image,
   imageAlt,
+  watermarkText,
 }: StakeholderSectionProps) => {
   const { openModal } = useLeadModal();
 
@@ -55,7 +58,9 @@ export const StakeholderSection = ({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="relative overflow-hidden"
           >
+            {watermarkText && <HeroWatermark text={watermarkText} className="pr-0" />}
             <span className="mb-4 inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary">
               {eyebrow}
             </span>
@@ -68,7 +73,7 @@ export const StakeholderSection = ({
               {features.map((feature) => (
                 <li
                   key={feature.label}
-                  className="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
+                  className="glass flex items-center gap-3 rounded-xl px-4 py-3"
                 >
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <feature.icon className="h-4 w-4" aria-hidden="true" />

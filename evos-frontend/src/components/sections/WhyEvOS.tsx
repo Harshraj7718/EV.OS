@@ -63,7 +63,7 @@ export const WhyEvOS = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
               whileHover={{ y: -8 }}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 text-left shadow-sm transition-shadow hover:shadow-xl hover:shadow-primary/10"
+              className="glass group relative overflow-hidden rounded-2xl p-8 text-left transition-shadow hover:shadow-xl hover:shadow-primary/10"
             >
               <div
                 className={`absolute inset-x-0 top-0 h-32 bg-gradient-to-b ${pillar.color} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}

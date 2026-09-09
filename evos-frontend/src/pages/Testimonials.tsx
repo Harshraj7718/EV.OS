@@ -16,11 +16,12 @@ export const Testimonials = () => {
         eyebrow="Investor Reviews"
         title="Hear From Our Investors"
         description="Real investors sharing their experience with Booklynk EV, in their own words."
+        watermark="Reviews"
       >
         <motion.div
           animate={{ rotate: [-2, 2, -2] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-          className="inline-block rounded-2xl border border-primary/20 bg-card/60 px-8 py-4 shadow-sm backdrop-blur-sm"
+          className="inline-block rounded-2xl border border-primary/20 bg-card/60 px-8 py-4 shadow-lg backdrop-blur-xl"
         >
           <span className="animate-gradient-move bg-[length:200%_200%] bg-gradient-to-r from-evos-green via-evos-blue to-evos-cyan bg-clip-text font-display text-2xl font-bold text-transparent sm:text-3xl">
             Booklynk EV Love

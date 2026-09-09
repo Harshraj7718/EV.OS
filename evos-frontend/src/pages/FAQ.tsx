@@ -26,7 +26,7 @@ export const FAQ = () => (
     <Helmet>
       <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
     </Helmet>
-    <FAQSection />
+    <FAQSection showWatermark />
     <CTASection />
   </div>
 );

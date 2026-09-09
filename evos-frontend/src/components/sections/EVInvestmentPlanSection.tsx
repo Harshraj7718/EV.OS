@@ -139,7 +139,7 @@ export const EVInvestmentPlanSection = () => {
 
         <div
           data-buyback-banner
-          className="mx-auto mt-16 flex max-w-3xl flex-col items-center gap-3 rounded-2xl border-2 border-primary bg-primary/10 px-8 py-6 text-center shadow-lg shadow-primary/20 sm:flex-row sm:justify-center sm:text-left"
+          className="mx-auto mt-16 flex max-w-3xl flex-col items-center gap-3 rounded-2xl border-2 border-primary bg-primary/10 px-8 py-6 text-center shadow-lg shadow-primary/20 backdrop-blur-xl sm:flex-row sm:justify-center sm:text-left"
         >
           <ShieldCheck className="h-8 w-8 shrink-0 text-primary" aria-hidden="true" />
           <p className="font-display text-lg font-bold uppercase tracking-wide text-primary sm:text-xl">

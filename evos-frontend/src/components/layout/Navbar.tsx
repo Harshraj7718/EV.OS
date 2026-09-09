@@ -76,7 +76,7 @@ export const Navbar = () => {
         <div className="hidden items-center gap-3 xl:flex">
           <ThemeToggle />
           <Button asChild>
-            <Link to="/investors">Book a Demo</Link>
+            <Link to="/investors">Invest Now</Link>
           </Button>
         </div>
 
@@ -128,7 +128,7 @@ export const Navbar = () => {
               <li className="pt-2">
                 <Button asChild className="w-full">
                   <Link to="/investors" onClick={() => setMobileOpen(false)}>
-                    Book a Demo
+                    Invest Now
                   </Link>
                 </Button>
               </li>
