@@ -3,6 +3,7 @@ import { ICreateLeadDto, IPaginatedResult, IPaginationQuery } from '../interface
 import { ILeadDocument } from '../models/lead.model';
 import { ApiError } from '../utils/ApiError';
 import { logger } from '../utils/logger';
+import { toCsv } from '../utils/csv';
 
 export class LeadService {
   constructor(private readonly repository: LeadRepository) {}
@@ -42,6 +43,33 @@ export class LeadService {
       limit,
       totalPages: Math.ceil(total / limit) || 1,
     };
+  }
+
+  async exportLeadsCsv(query: IPaginationQuery): Promise<string> {
+    const leads = await this.repository.findAllForExport(query);
+
+    return toCsv(
+      leads.map((lead) => ({
+        name: lead.name,
+        email: lead.email,
+        phone: lead.phone,
+        city: lead.city,
+        interest: lead.interest,
+        budget: lead.budget ?? '',
+        message: lead.message ?? '',
+        createdAt: lead.createdAt ? new Date(lead.createdAt).toISOString() : '',
+      })),
+      [
+        { key: 'name', header: 'Name' },
+        { key: 'email', header: 'Email' },
+        { key: 'phone', header: 'Phone' },
+        { key: 'city', header: 'City' },
+        { key: 'interest', header: 'Interest' },
+        { key: 'budget', header: 'Budget' },
+        { key: 'message', header: 'Message' },
+        { key: 'createdAt', header: 'Created At' },
+      ]
+    );
   }
 
   async getLeadById(id: string): Promise<ILeadDocument> {

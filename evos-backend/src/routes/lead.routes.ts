@@ -8,10 +8,16 @@ import { adminAuth } from '../middleware/adminAuth';
 const router = Router();
 
 // Public — used by the site's own lead capture / payment flows.
-router.post('/', leadSubmissionLimiter, validateRequest(createLeadSchema), leadController.createLead);
+router.post(
+  '/',
+  leadSubmissionLimiter,
+  validateRequest(createLeadSchema),
+  leadController.createLead
+);
 
 // Admin-only — exposes every customer's contact details.
 router.get('/', adminAuth, validateRequest(listLeadsSchema), leadController.listLeads);
+router.get('/export', adminAuth, validateRequest(listLeadsSchema), leadController.exportLeads);
 router.get('/:id', adminAuth, leadController.getLeadById);
 
 export default router;

@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Filter, Loader2, Users } from 'lucide-react';
+import { Download, Filter, Loader2, Users } from 'lucide-react';
+import { toast } from 'sonner';
 import { usePaginatedFetch } from '@/hooks/usePaginatedFetch';
 import { Pagination } from '@/components/Pagination';
+import { api, getErrorMessage } from '@/lib/api';
 import { Lead, LeadInterest } from '@/types';
 
 const INTERESTS: LeadInterest[] = ['Investor', 'Rider', 'Business', 'Other'];
@@ -9,8 +11,31 @@ const INTERESTS: LeadInterest[] = ['Investor', 'Rider', 'Business', 'Other'];
 export function LeadsTab() {
   const [page, setPage] = useState(1);
   const [interest, setInterest] = useState<string>('');
+  const [isExporting, setIsExporting] = useState(false);
 
   const { data, loading, error } = usePaginatedFetch<Lead>('/leads', page, { interest });
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    try {
+      const response = await api.get('/leads/export', {
+        params: interest ? { interest } : undefined,
+        responseType: 'blob',
+      });
+      const url = window.URL.createObjectURL(response.data as Blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `leads-${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      toast.error(getErrorMessage(err));
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
@@ -21,26 +46,41 @@ export function LeadsTab() {
           </span>
           <h2 className="font-display text-lg font-semibold">Leads</h2>
         </div>
-        <div className="relative">
-          <Filter
-            className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
-            aria-hidden="true"
-          />
-          <select
-            value={interest}
-            onChange={(e) => {
-              setInterest(e.target.value);
-              setPage(1);
-            }}
-            className="rounded-lg border border-input bg-background py-1.5 pl-8 pr-3 text-sm outline-none transition-colors focus:border-primary"
+        <div className="flex items-center gap-2">
+          <div className="relative">
+            <Filter
+              className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
+              aria-hidden="true"
+            />
+            <select
+              value={interest}
+              onChange={(e) => {
+                setInterest(e.target.value);
+                setPage(1);
+              }}
+              className="rounded-lg border border-input bg-background py-1.5 pl-8 pr-3 text-sm outline-none transition-colors focus:border-primary"
+            >
+              <option value="">All interests</option>
+              {INTERESTS.map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            type="button"
+            onClick={() => void handleExport()}
+            disabled={isExporting}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-sm font-medium transition-colors hover:enabled:border-primary/40 hover:enabled:bg-muted disabled:opacity-50"
           >
-            <option value="">All interests</option>
-            {INTERESTS.map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
+            {isExporting ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <Download className="h-3.5 w-3.5" />
+            )}
+            Download CSV
+          </button>
         </div>
       </div>
 

@@ -27,6 +27,11 @@ export class LeadRepository {
     return { items, total };
   }
 
+  async findAllForExport(query: IPaginationQuery): Promise<ILeadDocument[]> {
+    const filter = query.interest ? { interest: query.interest } : {};
+    return LeadModel.find(filter).sort({ createdAt: -1 }).exec();
+  }
+
   async findById(id: string): Promise<ILeadDocument | null> {
     return LeadModel.findById(id).exec();
   }
