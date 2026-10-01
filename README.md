@@ -20,7 +20,17 @@ evos/
 
 ### Marketing site (`evos-frontend`) — [booklynkev.com](https://booklynkev.com/)
 
-![Booklynk EV homepage](docs/screenshots/frontend-home.jpg)
+| Home | About |
+|---|---|
+| ![Home](docs/screenshots/frontend-home.jpg) | ![About](docs/screenshots/frontend-about.jpg) |
+
+| Investors | Testimonials |
+|---|---|
+| ![Investors](docs/screenshots/frontend-investors.jpg) | ![Testimonials](docs/screenshots/frontend-testimonials.jpg) |
+
+| Contact |
+|---|
+| ![Contact](docs/screenshots/frontend-contact.jpg) |
 
 ### Admin panel (`evos-admin`) — internal only, not linked from the public site
 
