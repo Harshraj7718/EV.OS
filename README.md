@@ -1,5 +1,6 @@
 # Booklynk EV
-Live LINK- https://booklynkev.com/
+
+**Live site: [https://booklynkev.com/](https://booklynkev.com/)**
 
 **Invest. Ride. Earn. Scale.**
 The Operating System for India's EV Economy.
@@ -12,6 +13,18 @@ evos/
 ├── evos-backend/      Node.js + Express + TypeScript + MongoDB (Mongoose)
 └── evos-admin/        React 19 + TypeScript + Vite + Tailwind — internal admin panel
 ```
+
+---
+
+## Preview
+
+### Marketing site (`evos-frontend`) — [booklynkev.com](https://booklynkev.com/)
+
+![Booklynk EV homepage](docs/screenshots/frontend-home.jpg)
+
+### Admin panel (`evos-admin`) — internal only, not linked from the public site
+
+![Admin panel login](docs/screenshots/admin-login.jpg)
 
 ---
 
