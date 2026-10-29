@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -27,6 +27,7 @@ import {
 import { apiClient, getApiErrorMessage } from '@/lib/api';
 import { COMPANY_ADDRESS_LINES, COMPANY_EMAIL, PHONE_NUMBERS, toTelHref } from '@/lib/contactInfo';
 import { scheduleScrollTriggerRefresh } from '@/lib/gsapRefresh';
+import { loadSalesmax } from '@/lib/salesmax';
 
 gsap.registerPlugin(useGSAP);
 
@@ -49,6 +50,10 @@ const SOCIALS = [
 
 export const Contact = () => {
   const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    loadSalesmax();
+  }, []);
 
   useGSAP(
     () => {
