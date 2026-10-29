@@ -30,7 +30,15 @@ app.use(
   })
 );
 app.use(compression());
-app.use(express.json({ limit: '10kb' }));
+// Keep the raw bytes: Razorpay's webhook signature is computed over the exact body it sent.
+app.use(
+  express.json({
+    limit: '10kb',
+    verify: (req, _res, buf) => {
+      (req as typeof req & { rawBody?: Buffer }).rawBody = buf;
+    },
+  })
+);
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(morgan(env.nodeEnv === 'production' ? 'combined' : 'dev', { stream: morganStream }));
 app.use('/api', apiRateLimiter);

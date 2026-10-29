@@ -2,7 +2,11 @@ import { Request, Response } from 'express';
 import { paymentService, PaymentService } from '../services/payment.service';
 import { ApiResponse } from '../utils/ApiResponse';
 import { asyncHandler } from '../utils/asyncHandler';
-import { ICreateOrderDto, IPaymentListQuery, IVerifyPaymentDto } from '../interfaces/payment.interface';
+import {
+  ICreateOrderDto,
+  IPaymentListQuery,
+  IVerifyPaymentDto,
+} from '../interfaces/payment.interface';
 
 export class PaymentController {
   constructor(private readonly service: PaymentService) {}
@@ -17,6 +21,16 @@ export class PaymentController {
     const query = req.query as unknown as IPaymentListQuery;
     const result = await this.service.listPayments(query);
     return ApiResponse.success(res, 200, 'Payments retrieved successfully', result);
+  });
+
+  handleWebhook = asyncHandler(async (req: Request, res: Response) => {
+    const rawBody = (req as Request & { rawBody?: Buffer }).rawBody;
+    const signature = req.headers['x-razorpay-signature'];
+    await this.service.handleWebhook(
+      rawBody,
+      typeof signature === 'string' ? signature : undefined
+    );
+    return ApiResponse.success(res, 200, 'Webhook received', null);
   });
 
   verifyPayment = asyncHandler(async (req: Request, res: Response) => {

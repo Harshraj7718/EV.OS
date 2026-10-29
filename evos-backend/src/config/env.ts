@@ -11,6 +11,8 @@ interface EnvConfig {
   rateLimitMaxRequests: number;
   razorpayKeyId: string;
   razorpayKeySecret: string;
+  razorpayWebhookSecret: string;
+  interaktWebhookUrl: string;
   adminUsername: string;
   adminPassword: string;
   jwtSecret: string;
@@ -33,6 +35,8 @@ export const env: EnvConfig = {
   rateLimitMaxRequests: Number(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
   razorpayKeyId: requireEnv('RAZORPAY_KEY_ID'),
   razorpayKeySecret: requireEnv('RAZORPAY_KEY_SECRET'),
+  razorpayWebhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET || '',
+  interaktWebhookUrl: process.env.INTERAKT_WEBHOOK_URL || '',
   adminUsername: requireEnv('ADMIN_USERNAME'),
   adminPassword: requireEnv('ADMIN_PASSWORD'),
   jwtSecret: requireEnv('JWT_SECRET'),

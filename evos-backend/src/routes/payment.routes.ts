@@ -19,6 +19,9 @@ router.post(
 );
 router.post('/verify', validateRequest(verifyPaymentSchema), paymentController.verifyPayment);
 
+// Called by Razorpay's servers (no admin/user session) — authenticated by its HMAC signature.
+router.post('/webhook', paymentController.handleWebhook);
+
 // Admin-only — exposes every customer's payment history.
 router.get('/', adminAuth, validateRequest(listPaymentsSchema), paymentController.listPayments);
 
